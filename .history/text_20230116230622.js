@@ -18,7 +18,6 @@ class UserAccount {
         this.age = age;
         this.days = days;
         this.money = money;
-        this.
     }
 
 

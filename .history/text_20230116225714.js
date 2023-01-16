@@ -3,25 +3,16 @@ const config = {
     mainPage : document.getElementById("main-page"),
 };
 
-function displayBlock (ele) {
-    ele.classList.remove("d-none");
-    ele.classList.add("d-block");
-}
-
-function displayNone (ele) {
-    ele.classList.remove("d-none");
-    ele.classList.add("d-block");
+function displayblock (ele) {
+    ele.class
 }
 class UserAccount {
-    constructor(name, age, days, money, profitPerClick, profitPerSeconds, belongings, hamburger){
+    constructor(name, age, days, money){
         this.name = name;
         this.age = age;
         this.days = days;
         this.money = money;
-        this.
     }
-
-
 };
 
 class Item {

@@ -13,12 +13,11 @@ function displayNone (ele) {
     ele.classList.add("d-block");
 }
 class UserAccount {
-    constructor(name, age, days, money, profitPerClick, profitPerSeconds, belongings, hamburger){
+    constructor(name, age, days, money, profitPer){
         this.name = name;
         this.age = age;
         this.days = days;
         this.money = money;
-        this.
     }
 
 

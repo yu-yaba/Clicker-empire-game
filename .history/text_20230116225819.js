@@ -10,18 +10,15 @@ function displayBlock (ele) {
 
 function displayNone (ele) {
     ele.classList.remove("d-none");
-    ele.classList.add("d-block");
+    ele.classList.add("d-block")
 }
 class UserAccount {
-    constructor(name, age, days, money, profitPerClick, profitPerSeconds, belongings, hamburger){
+    constructor(name, age, days, money){
         this.name = name;
         this.age = age;
         this.days = days;
         this.money = money;
-        this.
     }
-
-
 };
 
 class Item {
