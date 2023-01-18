@@ -33,17 +33,7 @@ class UserAccount {
         return this.money += this.profitPerClick;
     }
 
-    addSecondsProfit () {
-        return this.money += this.profitPerClick;
-    }
-
-    increaseDay () {
-        return this.days ++;
-    }
-
-    growOld () {
-        return this.age ++;
-    }
+    increaseday
 
 
 };
@@ -183,17 +173,6 @@ function createMainPage (userData) {
     })
 
     let processPerSeconds = setInterval(function () {
-        userInfo.querySelectorAll("h2")[3].innerHTML = `${userData.increaseDay()} days`;
-        userInfo.querySelectorAll("h2")[0].innerHTML = `$ ${userData.addSecondsProfit()}`;
-
-        if (userData.days == 365) {
-            userData.days = 1;
-            userData.growOld();
-            userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
-        }
+        userInfo.querySelectorAll("h2")[3].innerHTML = `${}`
     }, 1000);
-
-    let mainPageCon = document.createElement("div");
-    mainPageCon.append(userInfo, hamburgerCon, itemCon, dataCon);
-    return mainPageCon;
 }

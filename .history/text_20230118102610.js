@@ -192,8 +192,4 @@ function createMainPage (userData) {
             userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
         }
     }, 1000);
-
-    let mainPageCon = document.createElement("div");
-    mainPageCon.append(userInfo, hamburgerCon, itemCon, dataCon);
-    return mainPageCon;
 }

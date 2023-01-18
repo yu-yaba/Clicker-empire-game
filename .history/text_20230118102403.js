@@ -187,13 +187,8 @@ function createMainPage (userData) {
         userInfo.querySelectorAll("h2")[0].innerHTML = `$ ${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
-            userData.days = 1;
-            userData.growOld();
-            userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
+            userInfo.days = 1;
+            userInfo.
         }
     }, 1000);
-
-    let mainPageCon = document.createElement("div");
-    mainPageCon.append(userInfo, hamburgerCon, itemCon, dataCon);
-    return mainPageCon;
 }

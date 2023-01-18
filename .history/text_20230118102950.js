@@ -195,5 +195,5 @@ function createMainPage (userData) {
 
     let mainPageCon = document.createElement("div");
     mainPageCon.append(userInfo, hamburgerCon, itemCon, dataCon);
-    return mainPageCon;
+    
 }

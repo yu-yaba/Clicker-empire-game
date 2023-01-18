@@ -193,7 +193,6 @@ function createMainPage (userData) {
         }
     }, 1000);
 
-    let mainPageCon = document.createElement("div");
-    mainPageCon.append(userInfo, hamburgerCon, itemCon, dataCon);
-    return mainPageCon;
+    let mainpageCon = document.createElement("div");
+
 }
