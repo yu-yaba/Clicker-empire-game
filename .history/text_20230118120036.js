@@ -207,19 +207,9 @@ function createItemList (itemList, userData) {
                 <img alt="" src="${items[i].imgUrl}">
             </div>
             <div>
-                <h4>${items[i].name}</h4>
-                <p>${items[i].price}</p>
-                <p>${updateProfit(items[i])}</p>
-            </div>
-            <div>
-                <button class="btn btn-info">× 1</button>
-                <button class="btn btn-primary">max</button>
-            </div>
-            <div>
-                <h4>${renderStock(items[i])}</h4>
+                <h4></h
             </div>
         </div>
         `
     }
-    return eachItemCon;
 }

@@ -212,14 +212,11 @@ function createItemList (itemList, userData) {
                 <p>${updateProfit(items[i])}</p>
             </div>
             <div>
-                <button class="btn btn-info">× 1</button>
-                <button class="btn btn-primary">max</button>
-            </div>
+            <div
             <div>
                 <h4>${renderStock(items[i])}</h4>
             </div>
         </div>
         `
     }
-    return eachItemCon;
 }

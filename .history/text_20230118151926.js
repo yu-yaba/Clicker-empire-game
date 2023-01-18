@@ -213,7 +213,7 @@ function createItemList (itemList, userData) {
             </div>
             <div>
                 <button class="btn btn-info">× 1</button>
-                <button class="btn btn-primary">max</button>
+                <button class="btn btn-primary"></button>
             </div>
             <div>
                 <h4>${renderStock(items[i])}</h4>

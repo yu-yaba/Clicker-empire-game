@@ -199,27 +199,5 @@ function createMainPage (userData) {
 }
 
 function createItemList (itemList, userData) {
-    let eachItemCon = document.createElement("div");
-    for (let i = 0; i < itemList.length; i++) {
-        eachItemCon.innerHTML += `
-        <div>
-            <div>
-                <img alt="" src="${items[i].imgUrl}">
-            </div>
-            <div>
-                <h4>${items[i].name}</h4>
-                <p>${items[i].price}</p>
-                <p>${updateProfit(items[i])}</p>
-            </div>
-            <div>
-                <button class="btn btn-info">× 1</button>
-                <button class="btn btn-primary">max</button>
-            </div>
-            <div>
-                <h4>${renderStock(items[i])}</h4>
-            </div>
-        </div>
-        `
-    }
-    return eachItemCon;
+    let eachitem
 }
