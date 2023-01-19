@@ -102,11 +102,10 @@ function registerAccount () {
     if (userName == "yuya") player = new UserAccount(userName, 20, 0, 10000000, 100000, 1000, items, 0);
     else userData = new UserAccount (userName, 20, 0, 30000, 0, 0, items, 0);
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML ="";
     config.mainPage.append(createMainPage(player));
-    return userData;
 }
 
 function loginAccount () {
@@ -123,13 +122,12 @@ function loginAccount () {
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
+    }
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML = "";
     mainPage.append(createMainPage(userData))
-    return userData;
-    }
 }
 
 
@@ -234,14 +232,14 @@ function createItemList (items, item, userData) {
             <div>
                 <h4>${items[i].name}</h4>
                 <p>${items[i].price}</p>
-                <p>${renderUnit(items[i])}</p>
+                <p>${updateProfit(items[i])}</p>
             </div>
             <div>
                 <button class="btn btn-info purchase-btn">× 1</button>
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4>${renderNumOfPossession(items[i])}</h4>
+                <h4>${renderUnit(items[i])}</h4>
             </div>
         </div>
         `
@@ -278,12 +276,5 @@ function createItemList (items, item, userData) {
 }
 
 function renderUnit (item) {
-    if (item.type == "ability") return `${item.profit}/click`;
-    else if (item.type == "ETF Stock") return "0.1%/sec";
-    else if (item.type == "ETF Bonds") return "0.07%/sec";
-}
-
-function renderNumOfPossession (items) {
-    if (items.type == "investment") return "∞";
-    else return items.purchaseQuantity + "/" + items.purchaseLimit;
+    if (item.type == "ability") return `${item.}`
 }

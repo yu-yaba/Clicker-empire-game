@@ -58,28 +58,24 @@ class UserAccount {
 };
 
 class Item {
-    constructor(name, price, purchaseLimit, purchaseQuantity, profit, type, imgUrl){
+    constructor(name, imgUrl, price, profit, purchaseQuantity, purchaseLimit, type){
         this.name = name;
-        this.price = price;
-        this.purchaseLimit = purchaseLimit;
-        this.purchaseQuantity = purchaseQuantity;
-        this.profit = profit;
-        this.type = type;
         this.imgUrl = imgUrl;
+        this.price = price;
+        this.profit = profit;
+        this.purchaseQuantity = purchaseQuantity;
+        this.purchaseLimit = purchaseLimit;
+        this.type = type;
     }
 
-    increasePurchaseQuantity (quantity) {
-        this.purchaseQuantity += quantity;
+    increasepurchaseQuantity (amount) {
+        this.purchaseQuantity += amount;
     }
 
-    increaseAssets (quantity) {
+    increaseAssets (amount) {
         if (this.name == "ETF Stock") {
-            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.01;
-            this.price *= 1.1;
-        } else if (this.name == "ETF Bonds") {
-            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
+            this.
         }
-        return quantity * this.profit;
     }
 };
 
@@ -102,11 +98,10 @@ function registerAccount () {
     if (userName == "yuya") player = new UserAccount(userName, 20, 0, 10000000, 100000, 1000, items, 0);
     else userData = new UserAccount (userName, 20, 0, 30000, 0, 0, items, 0);
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML ="";
     config.mainPage.append(createMainPage(player));
-    return userData;
 }
 
 function loginAccount () {
@@ -123,13 +118,12 @@ function loginAccount () {
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
+    }
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML = "";
     mainPage.append(createMainPage(userData))
-    return userData;
-    }
 }
 
 
@@ -234,32 +228,20 @@ function createItemList (items, item, userData) {
             <div>
                 <h4>${items[i].name}</h4>
                 <p>${items[i].price}</p>
-                <p>${renderUnit(items[i])}</p>
+                <p>${updateProfit(items[i])}</p>
             </div>
             <div>
                 <button class="btn btn-info purchase-btn">× 1</button>
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4>${renderNumOfPossession(items[i])}</h4>
+                <h4>${renderStock(items[i])}</h4>
             </div>
         </div>
         `
     }
     let maxBtn = eachItemCon.querySelector(".max-btn")
     maxBtn.addEventListener("click", function () {
-    let totalAmount = Math.floor(userData.money / item.price);
-    let total = Math.floor(userData.money / item.price) * item.price;
-    if (total > userData.money) {
-        alert("お金が足りません");
-    } else if (item.purchaseLimit == item.purchaseQuantity) {
-        alert("これ以上購入できません");
-    } else {
-        userData.reduceBalance(total);
-        userData.increasePrice(item.increaseAssets(parseInt(total)));
-        item.increasePurchaseQuantity(totalAmount);
-    }
-    });
 
     let purchaseBtn = eachItemCon.querySelector(".purchase-btn");
     purchaseBtn.addEventListener("click", function () {
@@ -269,21 +251,12 @@ function createItemList (items, item, userData) {
             alert("これ以上購入できません");
         } else {
             userData.reduceBalance(item.price);
-            userData.increasePrice(item.increaseAssets(parseInt(item.price)));
-            item.increasePurchaseQuantity(1);
+            userData.increasePrice(item.price);
         }
         
-    });
+    })
+    })
+
     return eachItemCon;
 }
 
-function renderUnit (item) {
-    if (item.type == "ability") return `${item.profit}/click`;
-    else if (item.type == "ETF Stock") return "0.1%/sec";
-    else if (item.type == "ETF Bonds") return "0.07%/sec";
-}
-
-function renderNumOfPossession (items) {
-    if (items.type == "investment") return "∞";
-    else return items.purchaseQuantity + "/" + items.purchaseLimit;
-}

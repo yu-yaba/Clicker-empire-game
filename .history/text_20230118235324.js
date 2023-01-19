@@ -123,13 +123,12 @@ function loginAccount () {
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
+    }
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
     config.mainPage.innerHTML = "";
     mainPage.append(createMainPage(userData))
-    return userData;
-    }
 }
 
 

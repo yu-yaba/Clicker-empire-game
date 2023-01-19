@@ -102,11 +102,10 @@ function registerAccount () {
     if (userName == "yuya") player = new UserAccount(userName, 20, 0, 10000000, 100000, 1000, items, 0);
     else userData = new UserAccount (userName, 20, 0, 30000, 0, 0, items, 0);
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML ="";
     config.mainPage.append(createMainPage(player));
-    return userData;
 }
 
 function loginAccount () {
@@ -123,13 +122,12 @@ function loginAccount () {
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
+    }
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML = "";
     mainPage.append(createMainPage(userData))
-    return userData;
-    }
 }
 
 
@@ -285,5 +283,5 @@ function renderUnit (item) {
 
 function renderNumOfPossession (items) {
     if (items.type == "investment") return "∞";
-    else return items.purchaseQuantity + "/" + items.purchaseLimit;
+    else return items.purchaseQuantity
 }

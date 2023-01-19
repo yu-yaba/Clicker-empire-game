@@ -37,10 +37,6 @@ class UserAccount {
         return this.money += this.profitPerClick;
     }
 
-    reduceBalance (price) {
-        return this.money -= price;
-    }
-
     increaseDay () {
         return this.days ++;
     }
@@ -49,52 +45,33 @@ class UserAccount {
         return this.age ++;
     }
 
-    increasePrice (price, type) {
-        if (type == "ability") return this.profitPerClick += price;
-        else return this.profitPerSeconds += price;
-    }
-
 
 };
 
 class Item {
-    constructor(name, price, purchaseLimit, purchaseQuantity, profit, type, imgUrl){
+    constructor(name, imgUrl, price, profit, numPossession, purchaseLimit, type){
         this.name = name;
-        this.price = price;
-        this.purchaseLimit = purchaseLimit;
-        this.purchaseQuantity = purchaseQuantity;
-        this.profit = profit;
-        this.type = type;
         this.imgUrl = imgUrl;
-    }
-
-    increasePurchaseQuantity (quantity) {
-        this.purchaseQuantity += quantity;
-    }
-
-    increaseAssets (quantity) {
-        if (this.name == "ETF Stock") {
-            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.01;
-            this.price *= 1.1;
-        } else if (this.name == "ETF Bonds") {
-            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
-        }
-        return quantity * this.profit;
+        this.price = price;
+        this.profit = profit;
+        this.numPossession = numPossession;
+        this.purchaseLimit = purchaseLimit;
+        this.type = type;
     }
 };
 
 let items = [
-    new Item("Flip machine", 15000, 500, 0, 25, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
-    new Item("ETF Stock", 300000, Infinity, 0, 0.1, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
-    new Item("ETF Bonds", 300000, Infinity, 0, 0.07, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
-    new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
-    new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3181/3181382.png"),
-    new Item("House", 20000000, 100, 0, 32000, "realEstate", "https://cdn-icons-png.flaticon.com/512/619/619153.png"),
-    new Item("TownHouse", 40000000, 100, 0, 64000, "realEstate", "https://cdn-icons-png.flaticon.com/512/2590/2590620.png"),
-    new Item("Mansion", 250000000, 20, 0, 500000, "realEstate", "https://cdn-icons-png.flaticon.com/512/492/492058.png"),
-    new Item("Industrial", 1000000000, 10, 0, 2200000, "realEstate", "https://cdn-icons-png.flaticon.com/512/1258/1258543.png"),
-    new Item("Hotel Skyscraper", 10000000000, 5, 0, 25000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/683/683255.png"),
-    new Item("Bullet-Speed Sky Railway", 10000000000000, 1, 0, 30000000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/3112/3112932.png")
+    new Item("Flip Machine", "https://cdn.pixabay.com/photo/2019/06/30/20/09/grill-4308709_960_720.png", 1000, 25, 0, 500),
+    new Item("ETF Stock", "https://cdn.pixabay.com/photo/2016/03/31/20/51/chart-1296049_960_720.png", 300000, 0.1, 0, Infinity),
+    new Item("ETF Bonds", "https://cdn.pixabay.com/photo/2016/03/31/20/51/chart-1296049_960_720.png", 100000, 0.07, 0, Infinity),
+    new Item("Lemonade Stand","https://cdn.pixabay.com/photo/2012/04/15/20/36/juice-35236_960_720.png", 30000, 30, 0, 1000),
+    new Item("Ice Cream Truck", "https://cdn.pixabay.com/photo/2020/01/30/12/37/ice-cream-4805333_960_720.png", 100000, 120, 0, 500),
+    new Item("House", "https://cdn.pixabay.com/photo/2016/03/31/18/42/home-1294564_960_720.png", 2000000, 32000, 0, 100),
+    new Item("Town House", "https://cdn.pixabay.com/photo/2019/06/15/22/30/modern-house-4276598_960_720.png", 4000000, 64000, 100),
+    new Item("Mansion", "https://cdn.pixabay.com/photo/2017/10/30/20/52/condominium-2903520_960_720.png", 25000000, 500000, 20),
+    new Item("Industrial Space", "https://cdn.pixabay.com/photo/2012/05/07/17/35/factory-48781_960_720.png", 1000000000, 2200000, 0, 10),
+    new Item("Hotel Skyscraper", "https://cdn.pixabay.com/photo/2012/05/07/18/03/skyscrapers-48853_960_720.png", 10000000000, 25000000, 0, 5),
+    new Item("Bullet-Speed Sky Railway", "https://cdn.pixabay.com/photo/2013/07/13/10/21/train-157027_960_720.png", 10000000000000, 30000000000, 0, 1)
 ]
 
 function registerAccount () {
@@ -102,11 +79,10 @@ function registerAccount () {
     if (userName == "yuya") player = new UserAccount(userName, 20, 0, 10000000, 100000, 1000, items, 0);
     else userData = new UserAccount (userName, 20, 0, 30000, 0, 0, items, 0);
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML ="";
     config.mainPage.append(createMainPage(player));
-    return userData;
 }
 
 function loginAccount () {
@@ -119,17 +95,16 @@ function loginAccount () {
         let loginItems = [];
         for (let i = 0; i < saveData["items"].length; i++) {
             let eachItem = saveData["items"][i];
-            loginItems.push(new Item(eachItem["name"], eachItem["imgUrl"], eachItem["any"], eachItem["profit"], eachItem["purchaseQuantity"], eachItem["purchaseLimit"], eachItem["type"]))
+            loginItems.push(new Item(eachItem["name"], eachItem["imgUrl"], eachItem["any"], eachItem["profit"], eachItem["numPossession"], eachItem["purchaseLimit"], eachItem["type"]))
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
+    }
 
-    displayNone(config.initialForm);
-    displayBlock(config.mainPage);
+    displayNone(initialForm);
+    displayBlock(mainPage);
     config.mainPage.innerHTML = "";
     mainPage.append(createMainPage(userData))
-    return userData;
-    }
 }
 
 
@@ -234,56 +209,32 @@ function createItemList (items, item, userData) {
             <div>
                 <h4>${items[i].name}</h4>
                 <p>${items[i].price}</p>
-                <p>${renderUnit(items[i])}</p>
+                <p>${updateProfit(items[i])}</p>
             </div>
             <div>
                 <button class="btn btn-info purchase-btn">× 1</button>
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4>${renderNumOfPossession(items[i])}</h4>
+                <h4>${renderStock(items[i])}</h4>
             </div>
         </div>
         `
     }
     let maxBtn = eachItemCon.querySelector(".max-btn")
     maxBtn.addEventListener("click", function () {
-    let totalAmount = Math.floor(userData.money / item.price);
-    let total = Math.floor(userData.money / item.price) * item.price;
-    if (total > userData.money) {
-        alert("お金が足りません");
-    } else if (item.purchaseLimit == item.purchaseQuantity) {
-        alert("これ以上購入できません");
-    } else {
-        userData.reduceBalance(total);
-        userData.increasePrice(item.increaseAssets(parseInt(total)));
-        item.increasePurchaseQuantity(totalAmount);
-    }
-    });
 
     let purchaseBtn = eachItemCon.querySelector(".purchase-btn");
     purchaseBtn.addEventListener("click", function () {
         if (parseInt(item.price) > userData.money) {
             alert("お金が足りません");
-        } else if (item.purchaseLimit == item.purchaseQuantity) {
-            alert("これ以上購入できません");
-        } else {
-            userData.reduceBalance(item.price);
-            userData.increasePrice(item.increaseAssets(parseInt(item.price)));
-            item.increasePurchaseQuantity(1);
+        } else if (item.purchaseLimit == item.numPossession) {
+
         }
         
-    });
+    })
+    })
+
     return eachItemCon;
 }
 
-function renderUnit (item) {
-    if (item.type == "ability") return `${item.profit}/click`;
-    else if (item.type == "ETF Stock") return "0.1%/sec";
-    else if (item.type == "ETF Bonds") return "0.07%/sec";
-}
-
-function renderNumOfPossession (items) {
-    if (items.type == "investment") return "∞";
-    else return items.purchaseQuantity + "/" + items.purchaseLimit;
-}
