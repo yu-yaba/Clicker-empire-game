@@ -5,7 +5,7 @@ const config = {
     hamburgerInfo : document.getElementById("hamburger-info"),
     userInfo : document.getElementById("user-info"),
     itemInfo : document.getElementById("item-info"),
-    dataInfo : document.getElementById("data-info"),
+    dataInfo : document.getElementById("")
     userName : document.getElementById("userName"),
 };
 
@@ -304,7 +304,7 @@ function createMainPage (userData) {
     config.userInfo.append(createItemList(userData));
     config.userInfo.append(createData(userData));
     startInterval(userData)
-    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
+    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.data)
 }
 
 

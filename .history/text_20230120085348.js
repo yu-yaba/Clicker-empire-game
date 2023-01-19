@@ -304,7 +304,7 @@ function createMainPage (userData) {
     config.userInfo.append(createItemList(userData));
     config.userInfo.append(createData(userData));
     startInterval(userData)
-    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
+    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.data)
 }
 
 

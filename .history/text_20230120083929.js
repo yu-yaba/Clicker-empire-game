@@ -5,7 +5,6 @@ const config = {
     hamburgerInfo : document.getElementById("hamburger-info"),
     userInfo : document.getElementById("user-info"),
     itemInfo : document.getElementById("item-info"),
-    dataInfo : document.getElementById("data-info"),
     userName : document.getElementById("userName"),
 };
 
@@ -148,7 +147,7 @@ function createBalanceInfo (userData) {
 }
 
 function createUserInfo (userData) {
-    let userInfoCon = document.createElement("div");
+    let userInfoCon = document.getElementById("user-info");
     userInfoCon.classList.add("col-12", "d-flex", "flex-wrap");
     userInfoCon.innerHTML = `
     <div>
@@ -176,12 +175,12 @@ function createHamburger (userData) {
 
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
         hamburgerCon.querySelectorAll("p")[0].innerHTML = `${userData.increaseHamburgerPerClick()} Burgers`;
-        userInfoCon.querySelectorAll("h2")[0].innerHTML = `${userData.addClickProfit()}`;
+        userInfo.querySelectorAll("h2")[0].innerHTML = `${userData.addClickProfit()}`;
     })
     return hamburgerCon;
 }
 
-function createItemList (userData) {
+function createItem (userData) {
     let itemCon = document.createElement("div");
     itemCon.classList.add("col-12", "col-md-8");
     itemCon.innerHTML = `
@@ -190,6 +189,7 @@ function createItemList (userData) {
         </div>
     </div>
     `
+    itemCon.querySelector("#itemList").append(eachItemCon);
 
     let eachItemCon = document.createElement("div");
     for (let i = 0; i < items.length; i++) {
@@ -213,8 +213,6 @@ function createItemList (userData) {
         </div>
         `
     }
-    itemCon.querySelector("#itemList").append(eachItemCon);
-
     let maxBtn = eachItemCon.querySelector(".max-btn")
     maxBtn.addEventListener("click", function () {
     let totalAmount = Math.floor(userData.money / item.price);
@@ -243,6 +241,7 @@ function createItemList (userData) {
         }
         
     });
+
     return itemCon;
 }
 
@@ -286,8 +285,8 @@ function createData (userData) {
 
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
-        config.userInfo.querySelectorAll("h2")[4].innerHTML = `${userData.increaseDay()} days`;
-        config.userInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
+        userInfo.querySelectorAll("h2")[4].innerHTML = `${userData.increaseDay()} days`;
+        userInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -298,16 +297,68 @@ function startInterval (userData) {
 }
 
 function createMainPage (userData) {
-    config.userInfo.append(createBalanceInfo(userData));
+    config.userInfo.append(createUserInfo(userData));
     config.userInfo.append(createUserInfo(userData));
     config.userInfo.append(createHamburger(userData));
     config.userInfo.append(createItemList(userData));
     config.userInfo.append(createData(userData));
     startInterval(userData)
-    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
 }
 
 
+function createItemList (items, item, userData) {
+    let eachItemCon = document.createElement("div");
+    for (let i = 0; i < items.length; i++) {
+        eachItemCon.innerHTML += `
+        <div class="d-flex">
+            <div>
+                <img alt="" src="${items[i].imgUrl}" class="col-2 col-md-3" >
+            </div>
+            <div>
+                <h4 class="col-1">${items[i].name}</h4>
+                <p>${items[i].price}</p>
+                <p>${renderUnit(items[i])}</p>
+            </div>
+            <div>
+                <button class="btn btn-info purchase-btn">× 1</button>
+                <button class="btn btn-primary max-btn">max</button>
+            </div>
+            <div>
+                <h4>${renderNumOfPossession(items[i])}</h4>
+            </div>
+        </div>
+        `
+    }
+    let maxBtn = eachItemCon.querySelector(".max-btn")
+    maxBtn.addEventListener("click", function () {
+    let totalAmount = Math.floor(userData.money / item.price);
+    let total = Math.floor(userData.money / item.price) * item.price;
+    if (total > userData.money) {
+        alert("お金が足りません");
+    } else if (item.purchaseLimit == item.purchaseQuantity) {
+        alert("これ以上購入できません");
+    } else {
+        userData.reduceBalance(total);
+        userData.increasePrice(item.increaseAssets(parseInt(total)));
+        item.increasePurchaseQuantity(totalAmount);
+    }
+    });
+
+    let purchaseBtn = eachItemCon.querySelector(".purchase-btn");
+    purchaseBtn.addEventListener("click", function () {
+        if (parseInt(item.price) > userData.money) {
+            alert("お金が足りません");
+        } else if (item.purchaseLimit == item.purchaseQuantity) {
+            alert("これ以上購入できません");
+        } else {
+            userData.reduceBalance(item.price);
+            userData.increasePrice(item.increaseAssets(parseInt(item.price)));
+            item.increasePurchaseQuantity(1);
+        }
+        
+    });
+    return eachItemCon;
+}
 
 function renderUnit (item) {
     if (item.type == "ability") return `${item.profit}/click`;

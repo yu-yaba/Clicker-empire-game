@@ -5,7 +5,6 @@ const config = {
     hamburgerInfo : document.getElementById("hamburger-info"),
     userInfo : document.getElementById("user-info"),
     itemInfo : document.getElementById("item-info"),
-    dataInfo : document.getElementById("data-info"),
     userName : document.getElementById("userName"),
 };
 
@@ -176,12 +175,12 @@ function createHamburger (userData) {
 
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
         hamburgerCon.querySelectorAll("p")[0].innerHTML = `${userData.increaseHamburgerPerClick()} Burgers`;
-        userInfoCon.querySelectorAll("h2")[0].innerHTML = `${userData.addClickProfit()}`;
+        userInfo.querySelectorAll("h2")[0].innerHTML = `${userData.addClickProfit()}`;
     })
     return hamburgerCon;
 }
 
-function createItemList (userData) {
+function createItem (userData) {
     let itemCon = document.createElement("div");
     itemCon.classList.add("col-12", "col-md-8");
     itemCon.innerHTML = `
@@ -190,6 +189,7 @@ function createItemList (userData) {
         </div>
     </div>
     `
+    itemCon.querySelector("#itemList").append(eachItemCon);
 
     let eachItemCon = document.createElement("div");
     for (let i = 0; i < items.length; i++) {
@@ -213,8 +213,6 @@ function createItemList (userData) {
         </div>
         `
     }
-    itemCon.querySelector("#itemList").append(eachItemCon);
-
     let maxBtn = eachItemCon.querySelector(".max-btn")
     maxBtn.addEventListener("click", function () {
     let totalAmount = Math.floor(userData.money / item.price);
@@ -243,6 +241,7 @@ function createItemList (userData) {
         }
         
     });
+
     return itemCon;
 }
 
@@ -286,8 +285,8 @@ function createData (userData) {
 
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
-        config.userInfo.querySelectorAll("h2")[4].innerHTML = `${userData.increaseDay()} days`;
-        config.userInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
+        userInfo.querySelectorAll("h2")[4].innerHTML = `${userData.increaseDay()} days`;
+        userInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -298,13 +297,12 @@ function startInterval (userData) {
 }
 
 function createMainPage (userData) {
-    config.userInfo.append(createBalanceInfo(userData));
+    config.userInfo.append(createUserInfo(userData));
     config.userInfo.append(createUserInfo(userData));
     config.userInfo.append(createHamburger(userData));
     config.userInfo.append(createItemList(userData));
     config.userInfo.append(createData(userData));
     startInterval(userData)
-    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
 }
 
 
