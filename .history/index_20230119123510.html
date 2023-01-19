@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Clicker Empire Game</title>
+</head>
+<body>
+    <div class="vh-100 bg-dark d-flex justify-content-center align-items-center">
+        <div class="col-11 col-md-9">
+            <div class="bg">
+                <div id="initial-form" class="col-12 bg-white text-center p-4">
+                    <h2>Clicker Empire Game</h2>
+                    <form onsubmit=" event.preventDefault();">
+                        <div class="form-group">
+                            <input type="name" class="form-controll col-11 my-3 text-center" placeholder="Your name" id="userName" required>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <button type="submit" class="btn btn-primary col-5" onclick="registerAccount()">New</button>
+                            <button type="submit" class="btn btn-primary col-5" onclick="loginAccount()">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="main-page">
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="text.js"></script>
+</body>
+</html>
