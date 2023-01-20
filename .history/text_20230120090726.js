@@ -149,7 +149,7 @@ function createBalanceInfo (userData) {
 
 function createUserInfo (userData) {
     let userInfoCon = document.createElement("div");
-    userInfoCon.classList.add("d-flex", "flex-wrap");
+    userInfoCon.classList.add("col-12", "d-flex", "flex-wrap");
     userInfoCon.innerHTML = `
     <div>
         <h2>${userData.name}</h2>
@@ -176,7 +176,7 @@ function createHamburger (userData) {
 
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
         hamburgerCon.querySelectorAll("p")[0].innerHTML = `${userData.increaseHamburgerPerClick()} Burgers`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = `${userData.addClickProfit()}`;
+        userInfoCon.querySelectorAll("h2")[0].innerHTML = `${userData.addClickProfit()}`;
     })
     return hamburgerCon;
 }
@@ -286,8 +286,8 @@ function createData (userData) {
 
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
-        config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
+        config.userInfo.querySelectorAll("h2")[4].innerHTML = `${userData.increaseDay()} days`;
+        config.userInfo.querySelectorAll("h2")[1].innerHTML = `$ ${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -300,19 +300,11 @@ function startInterval (userData) {
 function createMainPage (userData) {
     config.balanceInfo.append(createBalanceInfo(userData));
     config.userInfo.append(createUserInfo(userData));
-    let headerCon = document.createElement("div");
-    headerCon.classList.add("row");
-    headerCon.append(config.balanceInfo, config.userInfo);
-
     config.hamburgerInfo.append(createHamburger(userData));
-    config.itemInfo.append(createItemList(userData));
-    let bodyCon = document.createElement("div");
-    bodyCon.classList.add("row", "justify-content-center");
-    bodyCon.append(config.hamburgerInfo, config.itemInfo);
-
-    config.dataInfo.append(createData(userData));
-    startInterval(userData);
-    config.mainPage.append(headerCon, bodyCon, config.dataInfo)
+    config.userInfo.append(createItemList(userData));
+    config.userInfo.append(createData(userData));
+    startInterval(userData)
+    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
 }
 
 

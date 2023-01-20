@@ -304,15 +304,12 @@ function createMainPage (userData) {
     headerCon.classList.add("row");
     headerCon.append(config.balanceInfo, config.userInfo);
 
-    config.hamburgerInfo.append(createHamburger(userData));
-    config.itemInfo.append(createItemList(userData));
     let bodyCon = document.createElement("div");
     bodyCon.classList.add("row", "justify-content-center");
     bodyCon.append(config.hamburgerInfo, config.itemInfo);
-
     config.dataInfo.append(createData(userData));
     startInterval(userData);
-    config.mainPage.append(headerCon, bodyCon, config.dataInfo)
+    config.mainPage.append(headerCon, config.hamburgerInfo, config.itemInfo, config.dataInfo)
 }
 
 

@@ -302,17 +302,12 @@ function createMainPage (userData) {
     config.userInfo.append(createUserInfo(userData));
     let headerCon = document.createElement("div");
     headerCon.classList.add("row");
-    headerCon.append(config.balanceInfo, config.userInfo);
-
+    headerCon.append(balanceInfo, u)
     config.hamburgerInfo.append(createHamburger(userData));
     config.itemInfo.append(createItemList(userData));
-    let bodyCon = document.createElement("div");
-    bodyCon.classList.add("row", "justify-content-center");
-    bodyCon.append(config.hamburgerInfo, config.itemInfo);
-
     config.dataInfo.append(createData(userData));
     startInterval(userData);
-    config.mainPage.append(headerCon, bodyCon, config.dataInfo)
+    config.mainPage.append(config.balanceInfo, config.userInfo, config.hamburgerInfo, config.itemInfo, config.dataInfo)
 }
 
 
