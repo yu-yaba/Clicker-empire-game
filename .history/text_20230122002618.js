@@ -277,10 +277,10 @@ function createData (userData) {
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
         config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
-        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${parseInt(userData.profitPerSeconds)}/days]`;
+        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${userData.profitPerSeconds}/days]`;
     
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;
+        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -319,5 +319,5 @@ function renderUnit (item) {
 
 function renderNumOfPossession (item) {
     if (item.type == "investment") return "∞";
-    else return item.purchaseQuantity + "/" + item.purchaseLimit;
+    else return ${item.purchaseQuantity + "/" + item.purchaseLimit;
 }

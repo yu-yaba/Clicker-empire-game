@@ -105,7 +105,7 @@ const itemList = [
 function registerAccount () {
     let userData;
     if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else userData = new UserAccount (config.userName.value, 20, 0, 3000000000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -236,14 +236,14 @@ function createItemList (userData, itemList) {
     let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
     maxBtn.addEventListener("click", function () {
     let totalAmount = Math.floor(userData.money / itemList[i].price);
-    let total = totalAmount * itemList[i].price;
+    let total = t * itemList[i].price;
         if (total > userData.money) {
             alert("お金が足りません");
         } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
             alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.increasePrice(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
+            userData.increasePrice(itemList[i].increaseAssets(parseInt(total)), itemList[i].type);
             itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })
@@ -277,10 +277,10 @@ function createData (userData) {
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
         config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
-        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${parseInt(userData.profitPerSeconds)}/days]`;
+        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${userData.profitPerSeconds}/days]`;
     
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;
+        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -317,7 +317,7 @@ function renderUnit (item) {
     else return `${item.profit}/sec`;
 }
 
-function renderNumOfPossession (item) {
-    if (item.type == "investment") return "∞";
-    else return item.purchaseQuantity + "/" + item.purchaseLimit;
+function renderNumOfPossession (items) {
+    if (items.type == "investment") return "∞";
+    else return items.purchaseQuantity + "/" + items.purchaseLimit;
 }

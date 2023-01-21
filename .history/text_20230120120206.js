@@ -54,9 +54,9 @@ class UserAccount {
         return this.age ++;
     }
 
-    increasePrice (profit, type) {
-        if (type == "ability") return this.profitPerClick += profit;
-        else return this.profitPerSeconds += profit;
+    increasePrice (price, type) {
+        if (type == "ability") return this.profitPerClick += price;
+        else return this.profitPerSeconds += price;
     }
 
 
@@ -84,11 +84,11 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity;
+        return quantity * this.profit;
     }
 };
 
-const itemList = [
+const items = [
     new Item("Flip machine", 15000, 500, 0, 25, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
     new Item("ETF Stock", 300000, Infinity, 0, 0.1, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
     new Item("ETF Bonds", 300000, Infinity, 0, 0.07, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
@@ -104,8 +104,8 @@ const itemList = [
 
 function registerAccount () {
     let userData;
-    if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else userData = new UserAccount (config.userName.value, 20, 0, 3000000000, 100, 0, itemList, 0);
+    if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, items, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, items, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -122,16 +122,16 @@ function loginAccount () {
         return false;
     } else {
         let loginItems = [];
-        for (let i = 0; i < saveData["belongings"].length; i++) {
-            let eachItem = saveData["belongings"][i];
+        for (let i = 0; i < saveData["items"].length; i++) {
+            let eachItem = saveData["items"][i];
             loginItems.push(new Item(eachItem["name"], eachItem["imgUrl"], eachItem["any"], eachItem["profit"], eachItem["purchaseQuantity"], eachItem["purchaseLimit"], eachItem["type"]))
         }
 
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
 
-    config.mainPage.innerHTML = "";
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
+    config.mainPage.innerHTML = "";
     config.mainPage.append(createMainPage(userData))
     return userData;
     }
@@ -182,8 +182,7 @@ function createHamburger (userData) {
     return hamburgerCon;
 }
 
-
-function createItemList (userData, itemList) {
+function createItemList (userData, item) {
     let itemCon = document.createElement("div");
     itemCon.classList.add("col-12", "col-md-8");
     itemCon.innerHTML = `
@@ -194,62 +193,57 @@ function createItemList (userData, itemList) {
     `
 
     let eachItemCon = document.createElement("div");
-    for (let i = 0; i < itemList.length; i++) {
+    for (let i = 0; i < items.length; i++) {
         eachItemCon.innerHTML += `
         <div class="d-flex">
             <div>
-                <img alt="" src="${itemList[i].imgUrl}" class="col-2 col-md-3" >
+                <img alt="" src="${items[i].imgUrl}" class="col-2 col-md-3" >
             </div>
             <div>
-                <h4 class="col-1">${itemList[i].name}</h4>
-                <p>${itemList[i].price}</p>
-                <p>${renderUnit(itemList[i])}</p>
+                <h4 class="col-1">${items[i].name}</h4>
+                <p>${items[i].price}</p>
+                <p>${renderUnit(items[i])}</p>
             </div>
             <div>
                 <button class="btn btn-info purchase-btn">× 1</button>
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4>${renderNumOfPossession(itemList[i])}</h4>
+                <h4>${renderNumOfPossession(items[i])}</h4>
             </div>
         </div>
         `
     }
-    for (let i = 0; i < itemList.length; i++) {
-    let purchaseBtn = eachItemCon.querySelectorAll(".purchase-btn")[i];
-    purchaseBtn.addEventListener("click", function () {
-        if (parseInt(itemList[i].price) > parseInt(userData.money)) {
-            return alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
-            return alert("これ以上購入できません");
-        } else {
-            userData.reduceBalance(itemList[i].price);
-            userData.increasePrice(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
-            return itemList[i].increasePurchaseQuantity(1);
-        
-        }
-        
-    })
-    }
+    itemCon.querySelector("#itemList").append(eachItemCon);
 
-    for (let i = 0; i < itemList.length; i++) {
-    let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
+    let maxBtn = eachItemCon.querySelector(".max-btn")
     maxBtn.addEventListener("click", function () {
-    let totalAmount = Math.floor(userData.money / itemList[i].price);
-    let total = totalAmount * itemList[i].price;
-        if (total > userData.money) {
+    let totalAmount = Math.floor(userData.money / items.price);
+    let total = Math.floor(userData.money / items.price) * items.price;
+    if (total > userData.money) {
+        alert("お金が足りません");
+    } else if (item.purchaseLimit == item.purchaseQuantity) {
+        alert("これ以上購入できません");
+    } else {
+        userData.reduceBalance(total);
+        userData.increasePrice(item.increaseAssets(parseInt(total)));
+        item.increasePurchaseQuantity(totalAmount);
+    }
+    });
+
+    let purchaseBtn = eachItemCon.querySelector(".purchase-btn");
+    purchaseBtn.addEventListener("click", function () {
+        if (parseInt(items.price) > userData.money) {
             alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
+        } else if (items.purchaseLimit == items.purchaseQuantity) {
             alert("これ以上購入できません");
         } else {
-            userData.reduceBalance(total);
-            userData.increasePrice(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
-            itemList[i].increasePurchaseQuantity(totalAmount);
+            userData.reduceBalance(items.price);
+            userData.increasePrice(items.increaseAssets(parseInt(items.price)));
+            item.increasePurchaseQuantity(1);
         }
-    })
-    }
-
-    itemCon.querySelector("#itemList").append(eachItemCon);
+        
+    });
     return itemCon;
 }
 
@@ -259,16 +253,33 @@ function createData (userData) {
     let dataCon = document.createElement("div");
     dataCon.classList.add("d-flex", "justify-content-end");
     dataCon.innerHTML = `
+    <button class="back-btn">
+        <i class="fas fa-undo-alt fa-3x btn-color"></i>
+    </button>
     <button class="save-btn">
         <i class="fas fa-save fa-3x btn-color"></i>
     </button>
     `
+
+    dataCon.querySelector(".back-btn").addEventListener("click", function () {
+        confirm("最初の画面に戻ります。セーブしていない場合はデータが消えますがよろしいでしょうか。")
+        if (confirm) {
+            clearInterval();
+            config.displayNone(mainPage);
+            config.displayBlock(initialForm);
+            config.innerHTML = "";
+        }
+    });
 
     dataCon.querySelector(".save-btn").addEventListener("click", function () {
         let saveData = userData.name;
         userData = JSON.stringify(userData);
         localStorage.setItem(saveData, userData);
         alert("データを保存しました。");
+        clearInterval();
+        config.displayNone(mainPage);
+        config.displayBlock(initialForm);
+        config.innerHTML = "";
     })
     return dataCon;
 }
@@ -276,11 +287,11 @@ function createData (userData) {
 
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
-        config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
-        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${parseInt(userData.profitPerSeconds)}/days]`;
+        config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.clickUnitPrice}/click]`;
+        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${userData.secondsUnitPrice}/days]`;
     
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;
+        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -298,7 +309,7 @@ function createMainPage (userData) {
     headerCon.append(config.balanceInfo, config.userInfo);
 
     config.hamburgerInfo.append(createHamburger(userData));
-    config.itemInfo.append(createItemList(userData, itemList));
+    config.itemInfo.append(createItemList(userData));
     let bodyCon = document.createElement("div");
     bodyCon.classList.add("row", "justify-content-center");
     bodyCon.append(config.hamburgerInfo, config.itemInfo);
@@ -312,12 +323,11 @@ function createMainPage (userData) {
 
 function renderUnit (item) {
     if (item.type == "ability") return `${item.profit}/click`;
-    else if (item.name == "ETF Stock") return "0.1%/sec";
-    else if (item.name == "ETF Bonds") return "0.07%/sec";
-    else return `${item.profit}/sec`;
+    else if (item.type == "ETF Stock") return "0.1%/sec";
+    else if (item.type == "ETF Bonds") return "0.07%/sec";
 }
 
-function renderNumOfPossession (item) {
-    if (item.type == "investment") return "∞";
-    else return item.purchaseQuantity + "/" + item.purchaseLimit;
+function renderNumOfPossession (items) {
+    if (items.type == "investment") return "∞";
+    else return items.purchaseQuantity + "/" + items.purchaseLimit;
 }

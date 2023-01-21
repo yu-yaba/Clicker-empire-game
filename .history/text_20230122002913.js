@@ -277,7 +277,7 @@ function createData (userData) {
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
         config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
-        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${parseInt(userData.profitPerSeconds)}/days]`;
+        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${pars(userData.profitPerSeconds}/days]`;
     
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
         config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;

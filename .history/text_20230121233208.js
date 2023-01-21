@@ -54,9 +54,9 @@ class UserAccount {
         return this.age ++;
     }
 
-    increasePrice (profit, type) {
-        if (type == "ability") return this.profitPerClick += profit;
-        else return this.profitPerSeconds += profit;
+    increasePrice (price, type) {
+        if (type == "ability") return this.profitPerClick += price;
+        else return this.profitPerSeconds += price;
     }
 
 
@@ -84,7 +84,7 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity;
+        return quantity * this.profit;
     }
 };
 
@@ -105,7 +105,7 @@ const itemList = [
 function registerAccount () {
     let userData;
     if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else userData = new UserAccount (config.userName.value, 20, 0, 3000000000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -205,53 +205,55 @@ function createItemList (userData, itemList) {
                 <p>${itemList[i].price}</p>
                 <p>${renderUnit(itemList[i])}</p>
             </div>
-            <div>
-                <button class="btn btn-info purchase-btn">× 1</button>
-                <button class="btn btn-primary max-btn">max</button>
-            </div>
+            ${createButton(itemList[i])}
             <div>
                 <h4>${renderNumOfPossession(itemList[i])}</h4>
             </div>
         </div>
         `
     }
-    for (let i = 0; i < itemList.length; i++) {
-    let purchaseBtn = eachItemCon.querySelectorAll(".purchase-btn")[i];
-    purchaseBtn.addEventListener("click", function () {
-        if (parseInt(itemList[i].price) > parseInt(userData.money)) {
-            return alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
-            return alert("これ以上購入できません");
-        } else {
-            userData.reduceBalance(itemList[i].price);
-            userData.increasePrice(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
-            return itemList[i].increasePurchaseQuantity(1);
-        
-        }
-        
-    })
-    }
-
-    for (let i = 0; i < itemList.length; i++) {
-    let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
-    maxBtn.addEventListener("click", function () {
-    let totalAmount = Math.floor(userData.money / itemList[i].price);
-    let total = totalAmount * itemList[i].price;
-        if (total > userData.money) {
-            alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
-            alert("これ以上購入できません");
-        } else {
-            userData.reduceBalance(total);
-            userData.increasePrice(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
-            itemList[i].increasePurchaseQuantity(totalAmount);
-        }
-    })
-    }
-
     itemCon.querySelector("#itemList").append(eachItemCon);
     return itemCon;
 }
+
+function createButton(item) {
+    let buttonCon = document.createElement("div");
+    buttonCon.innerHTML = `
+    <button class="btn btn-info purchase-btn">× 1</button>
+    <button class="btn btn-primary max-btn">max</button>
+    `
+
+    let purchaseBtn = buttonCon.querySelector(".purchase-btn");
+    purchaseBtn.addEventListener("click", function () {
+        if (parseInt(item.price) > parseInt(userData.money)) {
+            alert("お金が足りません");
+        } else if (item.purchaseLimit == item.purchaseQuantity) {
+            alert("これ以上購入できません");
+        } else {
+            userData.reduceBalance(item.price);
+            userData.increasePrice(item.increaseAssets(item.price));
+            item.increasePurchaseQuantity(1);
+        }
+        
+    });
+
+
+    let maxBtn = bbu.querySelector(".max-btn")
+    maxBtn.addEventListener("click", function () {
+        let totalAmount = Math.floor(userData.money / item.price);
+        let total = Math.floor(userData.money / item.price) * item.price;
+        if (total > userData.money) {
+            alert("お金が足りません");
+        } else if (item.purchaseLimit == item.purchaseQuantity) {
+            alert("これ以上購入できません");
+        } else {
+            userData.reduceBalance(total);
+            userData.increasePrice(item.increaseAssets(parseInt(total)));
+            item.increasePurchaseQuantity(totalAmount);
+        }
+    })
+}
+
 
 
 
@@ -277,10 +279,10 @@ function createData (userData) {
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
         config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
-        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${parseInt(userData.profitPerSeconds)}/days]`;
+        config.hamburgerInfo.querySelectorAll("p").item(2).innerHTML = `[$${userData.profitPerSeconds}/days]`;
     
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;
+        config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${userData.addSecondsProfit()}`;
 
         if (userData.days == 365) {
             userData.days = 1;
@@ -317,7 +319,7 @@ function renderUnit (item) {
     else return `${item.profit}/sec`;
 }
 
-function renderNumOfPossession (item) {
-    if (item.type == "investment") return "∞";
-    else return item.purchaseQuantity + "/" + item.purchaseLimit;
+function renderNumOfPossession (items) {
+    if (items.type == "investment") return "∞";
+    else return items.purchaseQuantity + "/" + items.purchaseLimit;
 }
