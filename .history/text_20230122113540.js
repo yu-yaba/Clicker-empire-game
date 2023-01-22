@@ -84,7 +84,7 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 
@@ -219,12 +219,11 @@ function createItemList (userData, itemList) {
     let purchaseBtn = eachItemCon.querySelectorAll(".purchase-btn")[i];
     purchaseBtn.addEventListener("click", function () {
         if (parseInt(itemList[i].price) > parseInt(userData.money)) {
-            return alert("お金が足りません");
         } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(itemList[i].price);
-            userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            userData.addProfit(itemList.increaseAssets(itemList[i].profit), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
@@ -239,7 +238,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })

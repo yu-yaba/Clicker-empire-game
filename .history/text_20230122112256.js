@@ -84,13 +84,13 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 
 const itemList = [
     new Item("Flip machine", 15000, 500, 0, 25, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
-    new Item("ETF Stock", 300000, Infinity, 0, 0.1, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
+    new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
     new Item("ETF Bonds", 300000, Infinity, 0, 0.07, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
     new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
     new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3181/3181382.png"),
@@ -224,7 +224,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(itemList[i].price);
-            userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
@@ -239,7 +239,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })

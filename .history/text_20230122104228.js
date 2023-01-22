@@ -84,7 +84,7 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 
@@ -210,7 +210,7 @@ function createItemList (userData, itemList) {
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4 class="possession">${renderNumOfPossession(itemList[i])}</h4>
+                <h4 class="stock">${renderNumOfPossession(itemList[i])}</h4>
             </div>
         </div>
         `
@@ -224,7 +224,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(itemList[i].price);
-            userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
@@ -239,16 +239,16 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })
 
     setInterval (function() {
-        eachItemCon.querySelectorAll(".possession")[i].innerHTML = renderNumOfPossession(itemList[i]);
+        eachItemCon.querySelectorAll(".stock")[i].innerHTML = renderNumOfPossession(itemList[i]);
         if(itemList[i].name == "ETF Stock") eachItemCon.querySelectorAll(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
         if(itemList[i].purchaseQuantity == itemList[i].purchaseLimit) {
-            AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
+            AvailabilityPurchase(eachItemCon.querySelectorAll(".stock")[i], false);
         }
     }, 1000);
     }
@@ -287,7 +287,7 @@ function startInterval (userData) {
         if (userData.days == 365) {
             userData.days = 1;
             userData.growOld();
-            config.userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
+            userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
         }
     }, 1000);
 }
@@ -327,7 +327,6 @@ function renderNumOfPossession (item) {
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
-        ele.classList.remove("text-dark")
         ele.classList.add("available");
     } else {
         ele.classList.remove("no-available");

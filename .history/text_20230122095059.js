@@ -54,7 +54,7 @@ class UserAccount {
         return this.age ++;
     }
 
-    addProfit (profit, type) {
+    increasePrice (profit, type) {
         if (type == "ability") return this.profitPerClick += profit;
         else return this.profitPerSeconds += profit;
     }
@@ -79,12 +79,12 @@ class Item {
 
     increaseAssets (quantity) {
         if (this.name == "ETF Stock") {
-            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.001;
+            this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.01;
             this.price *= 1.1;
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 
@@ -105,7 +105,7 @@ const itemList = [
 function registerAccount () {
     let userData;
     if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else userData = new UserAccount (config.userName.value, 20, 0, 30000000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 3000000000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -187,7 +187,7 @@ function createItemList (userData, itemList) {
     let itemCon = document.createElement("div");
     itemCon.classList.add("col-12", "col-md-8");
     itemCon.innerHTML = `
-    <div style="overflow: auto; height: 20em;" >
+    <div style="overflow: scroll; height: 20em;" >
         <div id="itemList">
         </div>
     </div>
@@ -203,14 +203,14 @@ function createItemList (userData, itemList) {
             <div>
                 <h4 class="col-1">${itemList[i].name}</h4>
                 <p class="updatePrice">${itemList[i].price}</p>
-                <p>$${renderProfit(itemList[i])}</p>
+                <p>${renderProfit(itemList[i])}</p>
             </div>
             <div>
                 <button class="btn btn-info purchase-btn">× 1</button>
                 <button class="btn btn-primary max-btn">max</button>
             </div>
             <div>
-                <h4 class="possession">${renderNumOfPossession(itemList[i])}</h4>
+                <h4 class="stock">${renderNumOfPossession(itemList[i])}</h4>
             </div>
         </div>
         `
@@ -224,7 +224,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(itemList[i].price);
-            userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            userData.increasePrice(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
@@ -233,23 +233,20 @@ function createItemList (userData, itemList) {
     maxBtn.addEventListener("click", function () {
     let totalAmount = Math.floor(userData.money / itemList[i].price);
     let total = totalAmount * itemList[i].price;
-        if (total > parseInt(userData.money)) {
-            return alert("お金が足りません");
+        if (total > userData.money) {
+            alert("お金が足りません");
         } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
-            return alert("これ以上購入できません");
+            alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
-            return itemList[i].increasePurchaseQuantity(totalAmount);
+            userData.increasePrice(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
+            itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })
 
     setInterval (function() {
-        eachItemCon.querySelectorAll(".possession")[i].innerHTML = renderNumOfPossession(itemList[i]);
-        if(itemList[i].name == "ETF Stock") eachItemCon.querySelectorAll(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
-        if(itemList[i].purchaseQuantity == itemList[i].purchaseLimit) {
-            AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
-        }
+        eachItemCon.querySelectorAll(".stock")[i].innerHTML = renderNumOfPossession(itemList[i]);
+        if(itemList[i].name == "ETF ")
     }, 1000);
     }
 
@@ -263,7 +260,9 @@ function createData (userData) {
     let dataCon = document.createElement("div");
     dataCon.classList.add("d-flex", "justify-content-end");
     dataCon.innerHTML = `
-    <button class="save-btn">save</button>
+    <button class="save-btn">
+        <i class="fas fa-save fa-3x btn-color"></i>
+    </button>
     `
 
     dataCon.querySelector(".save-btn").addEventListener("click", function () {
@@ -287,7 +286,7 @@ function startInterval (userData) {
         if (userData.days == 365) {
             userData.days = 1;
             userData.growOld();
-            config.userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
+            userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
         }
     }, 1000);
 }
@@ -322,15 +321,4 @@ function renderProfit (item) {
 function renderNumOfPossession (item) {
     if (item.type == "investment") return "∞";
     else return item.purchaseQuantity + "/" + item.purchaseLimit;
-}
-
-function AvailabilityPurchase(ele, bool) {
-    if(bool == true) {
-        ele.classList.remove("no-available");
-        ele.classList.remove("text-dark")
-        ele.classList.add("available");
-    } else {
-        ele.classList.remove("no-available");
-        ele.classList.add("available");
-    }
 }

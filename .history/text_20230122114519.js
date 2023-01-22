@@ -84,7 +84,7 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 

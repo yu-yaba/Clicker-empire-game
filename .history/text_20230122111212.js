@@ -84,7 +84,7 @@ class Item {
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
-        return quantity * this.profit;
+        return quantity;
     }
 };
 
@@ -224,7 +224,7 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(itemList[i].price);
-            userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(itemList[i].profit), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
@@ -239,13 +239,13 @@ function createItemList (userData, itemList) {
             return alert("これ以上購入できません");
         } else {
             userData.reduceBalance(total);
-            userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
+            userData.addProfit(itemList[i].increaseAssets(parseInt(itemList[i].profit * totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
         }
     })
 
     setInterval (function() {
-        eachItemCon.querySelectorAll(".possession")[i].innerHTML = renderNumOfPossession(itemList[i]);
+        eachItemCon.querySelectorAll(".stock")[i].innerHTML = renderNumOfPossession(itemList[i]);
         if(itemList[i].name == "ETF Stock") eachItemCon.querySelectorAll(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
         if(itemList[i].purchaseQuantity == itemList[i].purchaseLimit) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
@@ -327,7 +327,7 @@ function renderNumOfPossession (item) {
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
-        ele.classList.remove("text-dark")
+        ele.classList.remove()
         ele.classList.add("available");
     } else {
         ele.classList.remove("no-available");
