@@ -177,7 +177,7 @@ function createHamburger (userData) {
 
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
         hamburgerCon.querySelectorAll("p")[0].innerHTML = `${userData.increaseHamburgerPerClick()} Burgers`;
-        config.balanceInfo.querySelectorAll("h2")[1].innerHTML =` $${parseInt(userData.addClickProfit())}`;
+        config.balanceInfo.querySelectorAll("h2")[1].innerHTML =` $${par(userData.addClickProfit()}`;
     })
     return hamburgerCon;
 }
