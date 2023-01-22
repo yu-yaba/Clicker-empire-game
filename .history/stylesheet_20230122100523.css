@@ -3,9 +3,7 @@
     height: auto;
 }
 
-.available {
-    color: rgb(19, 203, 19);
-}
+.available 
 
 .no-available {
     color: red;
