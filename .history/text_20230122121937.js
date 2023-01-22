@@ -105,7 +105,7 @@ const itemList = [
 function registerAccount () {
     let userData;
     if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 3000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
