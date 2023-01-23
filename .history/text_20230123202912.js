@@ -103,7 +103,7 @@ const itemList = [
 ]
 
 function registerAccount () {
-    let userData = "";
+    let userData "";
     if (config.userName.value === "yuya")  userData = new UserAccount("yuya", 20, 0, 10000000, 100000, 1000, itemList, 0);
     else if (config.userName.value == "") {
         return alert (`名前を入力して下さい`); 

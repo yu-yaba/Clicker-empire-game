@@ -4,12 +4,7 @@ body {
 }
 
 .bg-skyblue {
-    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
-}
-
-.bg-white {
-    border-radius: 33px;
-}
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 10px, rgb(91, 193, 248) 0%, #371ad8 50%);}
 
 .img-fluid {
     max-width: 40%; 

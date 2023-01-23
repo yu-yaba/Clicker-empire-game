@@ -80,7 +80,7 @@ class Item {
     increaseAssets (quantity) {
         if (this.name == "ETF Stock") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.001;
-            this.price = this.price * 1.1;
+            this.price *= 1.1;
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
         }
@@ -103,10 +103,10 @@ const itemList = [
 ]
 
 function registerAccount () {
-    let userData = "";
-    if (config.userName.value === "yuya")  userData = new UserAccount("yuya", 20, 0, 10000000, 100000, 1000, itemList, 0);
-    else if (config.userName.value == "") {
-        return alert (`名前を入力して下さい`); 
+    let userData;
+    if (config.userName.value == "yuya") userData = new UserAccount(yuya, 20, 0, 10000000, 100000, 1000, itemList, 0);
+    else if (config.userName.value == null) {
+        
     }
     else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
 

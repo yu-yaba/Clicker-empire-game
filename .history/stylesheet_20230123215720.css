@@ -4,7 +4,7 @@ body {
 }
 
 .bg-skyblue {
-    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%, rgb(21, 43, 120) 1%);
 }
 
 .bg-white {
