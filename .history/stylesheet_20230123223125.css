@@ -1,6 +1,5 @@
 body {
-    font-family: 'Bevan' !important;
-    font-family:  cursive;
+    font-family: "平成角ゴシック";
     font-weight: 10;
 }
 
@@ -38,7 +37,7 @@ body {
     box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);
 }
 
-#initial-form { 
+#particles-js { 
 	position:fixed;/*描画固定*/
 	z-index:-1;/*描画を一番下に*/
 	width: 100%;

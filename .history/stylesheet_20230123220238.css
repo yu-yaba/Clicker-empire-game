@@ -1,0 +1,28 @@
+body {
+    font-family: "平成角ゴシック";
+    font-weight: 10;
+}
+
+.bg-skyblue {
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+}
+
+.btn-warning
+
+.bg-white {
+    border-radius: 33px;
+}
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+

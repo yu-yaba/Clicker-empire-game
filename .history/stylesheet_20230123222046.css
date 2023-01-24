@@ -1,6 +1,5 @@
 body {
-    font-family: 'Bevan' !important;
-    font-family:  cursive;
+    font-family: "平成角ゴシック";
     font-weight: 10;
 }
 
@@ -9,6 +8,7 @@ body {
 }
 
 .btn1-warning {
+    font-weight: bold;
     box-shadow:0 6px 0 0 #6d73167b;
     transform: translateY(-6px);
     transition:0.3s all;
@@ -35,23 +35,7 @@ body {
 
 .bg-white {
     border-radius: 33px;
-    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);
-}
-
-#initial-form { 
-	position:fixed;/*描画固定*/
-	z-index:-1;/*描画を一番下に*/
-	width: 100%;
-	height: 100%;
-	background-color:#070A31;/*背景色*/
-}
-
-#wrapper {
-	position: relative;/*描画を#particles-jsよりも上にするためposition:relative;を指定*/
-	z-index: 1;/*z-indexの数字を大きくすることで描画を#particles-jsよりも上に*/
-	width:100%;
-	height: 100%;
-}
+    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);}
 
 .img-fluid {
     max-width: 40%; 

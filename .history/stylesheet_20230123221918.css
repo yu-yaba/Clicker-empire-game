@@ -1,6 +1,5 @@
 body {
-    font-family: 'Bevan' !important;
-    font-family:  cursive;
+    font-family: "平成角ゴシック";
     font-weight: 10;
 }
 
@@ -28,30 +27,14 @@ body {
     background: -webkit-linear-gradient(top,  #00ccff 0%,#1140d9 100%); /* Chrome10-25,Safari5.1-6 */
 }
 
-.btn1-primary:hover {
+/* .btn1-warning {
     box-shadow:0 2px 0 0 #005400;
     transform: translateY(-2px);
-}
+} */
 
 .bg-white {
     border-radius: 33px;
-    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);
-}
-
-#initial-form { 
-	position:fixed;/*描画固定*/
-	z-index:-1;/*描画を一番下に*/
-	width: 100%;
-	height: 100%;
-	background-color:#070A31;/*背景色*/
-}
-
-#wrapper {
-	position: relative;/*描画を#particles-jsよりも上にするためposition:relative;を指定*/
-	z-index: 1;/*z-indexの数字を大きくすることで描画を#particles-jsよりも上に*/
-	width:100%;
-	height: 100%;
-}
+    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);}
 
 .img-fluid {
     max-width: 40%; 

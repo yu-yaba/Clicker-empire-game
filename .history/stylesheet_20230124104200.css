@@ -1,6 +1,5 @@
 body {
-    font-family: 'Bevan' !important;
-    font-family:  cursive;
+    font-family: 'Bevan' !important, cursive;
     font-weight: 10;
 }
 

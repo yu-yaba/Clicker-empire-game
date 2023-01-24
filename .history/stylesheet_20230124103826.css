@@ -1,7 +1,6 @@
 body {
-    font-family: 'Bevan' !important;
-    font-family:  cursive;
-    font-weight: 10;
+    font-family: 'Bevan', cursive;
+        font-weight: 10;
 }
 
 .bg-skyblue {
