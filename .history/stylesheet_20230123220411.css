@@ -1,0 +1,44 @@
+body {
+    font-family: "平成角ゴシック";
+    font-weight: 10;
+}
+
+.bg-skyblue {
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+}
+
+.btn-warning {
+    color: #fff;
+    /*background-color: #008000; ←元の背景色は不要なので削除*/
+    border-radius:8px;
+    text-align:center;
+    padding:10px 20px;
+    box-shadow:0 6px 0 0 #b7ea11;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    /*↓コピーしたCSSをここに追加↓*/
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0ba500+0,008000+100 */
+    background: #0ba500; /* Old browsers */
+    background: -moz-linear-gradient(top,  #0ba500 0%, #008000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #0ba500 0%,#008000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #0ba500 0%,#008000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ba500', endColorstr='#008000',GradientType=0 ); /* IE6-9 */
+}
+
+.bg-white {
+    border-radius: 33px;
+}
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+

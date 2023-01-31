@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Clicker Empire Game</title>
+</head>
+<body>
+
+    <div id="initial-form" class="" >
+        <div class="vh-100 bg-orange d-flex justify-content-center align-items-center flex-wrap">     
+            <div class="d-flex justify-content-center col-12 p">
+                <h1>Clicker Empire Game</h1>
+            </div>
+            <div class="col-11 col-md-4 text-center">
+                <div class="initialCon p-4">
+                    <form onsubmit=" event.preventDefault();">
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-controll col-11 my-3 text-center" placeholder="Your name" id="userName" required="required">
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <button type="submit" class="btn btn1-warning col-5" onclick="registerAccount()">New</button>
+                            <button type="submit" class="btn btn1-primary col-5" onclick="loginAccount()">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="main-page" class="d-none">
+    <div class="vh-100 bg-dark justify-content-center align-items-center">
+        <div class="col-12 col-md-11 justify-content-center container">
+            <div class=>
+                <div id="balance-info" class="col-12 col-md-7"></div>
+                <div id="user-info" class="col-12 col-md-5 d-flex justify-content-center"></div>
+            </div>
+            <div class=>
+                <div id="hamburger-info" class="col-12 col-md-4 ju"></div>
+                <div id="item-info" class="col-12 col-md-8 ju"></div>
+            </div>
+            <div id="data-info" class="d-flex justify-content-end"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="text.js"></script>
+</body>
+</html>

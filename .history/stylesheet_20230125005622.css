@@ -1,0 +1,92 @@
+body {
+    font-family: 'Bevan' !important;
+    font-family:  cursive;
+    font-weight: 10;
+}
+
+.bg-skyblue {
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+}
+
+.btn1-warning {
+    box-shadow:0 6px 0 0 #6d73167b;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    background: -webkit-linear-gradient(top,  #e5f678 0%,#ffd500 100%); /* Chrome10-25,Safari5.1-6 */
+    z-index: 2;
+}
+
+.btn1-warning:hover {
+    box-shadow:0 2px 0 0 #005400;
+    transform: translateY(-2px);
+    
+}
+
+.btn1-primary {
+    box-shadow:0 6px 0 0 #0008ff7b;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    background: -webkit-linear-gradient(top,  #00ccff 0%,#466ff6 100%); /* Chrome10-25,Safari5.1-6 */
+}
+
+.btn1-primary:hover {
+    box-shadow:0 2px 0 0 #005400;
+    transform: translateY(-2px);
+}
+
+.bg-white {
+    border-radius: 33px;
+    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);
+    z-index: 4;
+}
+
+#initial-form { 
+	position:fixed;/*描画固定*/
+	z-index:-1;/*描画を一番下に*/
+	width: 100%;
+	height: 100%;
+	background-color:#070A31;/*背景色*/
+}
+
+#wrapper {
+	position: relative;/*描画を#particles-jsよりも上にするためposition:relative;を指定*/
+	z-index: 1;/*z-indexの数字を大きくすることで描画を#particles-jsよりも上に*/
+	width:100%;
+	height: 100%;
+}
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+
+
+/*コンテンツを囲むラッパー要素*/
+.wrap{
+	width:100%;
+	height:700px;
+	position:relative;/*基準要素、子の基準となる*/
+}
+
+
+
+canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    z-index: -1;
+    }
+

@@ -1,0 +1,35 @@
+body {
+    font-family: "平成角ゴシック";
+    font-weight: 10;
+}
+
+.bg-skyblue {
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+}
+
+.btn-warning {
+    box-shadow:0 6px 0 0 #c1ce0b7b;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    background: #0ba500; /* Old browsers */
+    background: -webkit-linear-gradient(top,  #b5cd17 0%,#e2ea0c 100%); /* Chrome10-25,Safari5.1-6 */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ba500', endColorstr='#008000',GradientType=0 ); /* IE6-9 */
+}
+
+.bg-white {
+    border-radius: 33px;
+}
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+

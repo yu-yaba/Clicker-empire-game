@@ -1,0 +1,44 @@
+body {
+    font-family: "平成角ゴシック";
+    font-weight: 10;
+}
+
+.bg-skyblue {
+    background: radial-gradient(at 50% 50%,rgb(44, 127, 227) 20px, rgb(91, 193, 248) 7%, #235fdf 75%);
+}
+
+.btn1-warning {
+    box-shadow:0 6px 0 0 #6d73167b;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    background: -webkit-linear-gradient(top,  #e5f678 0%,#ffd500 100%); /* Chrome10-25,Safari5.1-6 */
+}
+
+.btn1-warning:hover {
+    
+}
+
+.btn1-primary {
+    box-shadow:0 6px 0 0 #0a11d17b;
+    transform: translateY(-6px);
+    transition:0.3s all;
+    background: -webkit-linear-gradient(top,  #00ccff 0%,#1140d9 100%); /* Chrome10-25,Safari5.1-6 */
+}
+
+.bg-white {
+    border-radius: 33px;
+    box-shadow: 0 13px 20px 0 rgba(12, 15, 3, 0.5);}
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+
