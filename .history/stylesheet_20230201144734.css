@@ -1,0 +1,89 @@
+body {
+    font-family: 'Bevan', cursive;
+    color: white;
+    font-weight: bold;
+    text-shadow: 3px 3px 0 #000
+}
+
+
+/* #main-page {
+    font-family: 'Bevan', cursive;
+    color: black;
+    font-weight: bold;
+    text-shadow: 3px 3px 0 white;
+} */
+
+.vh-100 {
+    height: 100%;
+    width: 100%;
+}
+
+.initialCon {
+    backdrop-filter: blur(8px); 
+    background-color: rgba(255, 255, 255); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(80, 227, 194, 0.5), inset -3px -3px 16px 0px rgba(80, 227, 194, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+}
+
+.bg-img {
+    background-image: url("img/1920355.jpg");
+    background-position: center bottom; 
+}
+
+.bg-white {
+    background: white;
+}
+
+#initial-form h1 {
+    font-size: 3.5em;
+}
+
+.btn1-warning {
+    backdrop-filter: blur(8px); 
+    background-color: rgb(255, 230, 0); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(255, 255, 255, 0.5), inset -3px -3px 16px 0px rgb(255, 255, 255, 0.3), inset 0px 11px 28px 0px rgb(255, 245, 196);
+}
+
+.btn1-warning:hover {
+    box-shadow:0 2px 0 0 rgb(92, 104, 26);
+    transform: translateY(-2px);
+    
+}
+
+.btn1-primary {
+    backdrop-filter: blur(8px); 
+    background-color: rgb(5, 9, 255); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(255, 255, 255, 0.5), inset -2px -2px 10px 0px rgba(0, 225, 255, 0.1), inset 0px 11px 28px 0px rgb(84, 241, 255);
+}
+
+.btn1-primary:hover {
+    box-shadow:0 2px 0 0 #005400;
+    transform: translateY(-2px);
+}
+
+
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+
+.mainPageCon {
+    backdrop-filter: blur(8px); background-color: rgb(4, 86, 4); border-radius: 26px; box-shadow: 35px 35px 68px 0px rgba(80, 227, 194, 0.5), inset -3px -3px 16px 0px rgba(80, 227, 194, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    padding: 40px;
+}
+
+balance
+
+
+

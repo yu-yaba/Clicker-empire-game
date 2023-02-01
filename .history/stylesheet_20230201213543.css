@@ -1,0 +1,171 @@
+body {
+    font-family: 'Bevan', cursive;
+    color: white;
+    font-weight: bold;
+    text-shadow: 3px 3px 0 #000
+}
+
+
+/* #main-page {
+    font-family: 'Bevan', cursive;
+    color: black;
+    font-weight: bold;
+    text-shadow: 3px 3px 0 white;
+} */
+
+.vh-100 {
+    height: 100%;
+    width: 100%;
+}
+
+.initialCon {
+    backdrop-filter: blur(8px); 
+    background-color: rgba(255, 255, 255); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(80, 227, 194, 0.5), inset -3px -3px 16px 0px rgba(80, 227, 194, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+}
+
+.bg-img {
+    background-image: url("img/1920355.jpg");
+    background-position: center bottom; 
+}
+
+.bg-white {
+    background: white;
+}
+
+#initial-form h1 {
+    font-size: 3.5em;
+}
+
+.btn1-warning {
+    backdrop-filter: blur(8px); 
+    background-color: rgb(255, 230, 0); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(255, 255, 255, 0.5), inset -3px -3px 16px 0px rgb(255, 255, 255, 0.3), inset 0px 11px 28px 0px rgb(255, 245, 196);
+}
+
+.btn1-warning:hover {
+    box-shadow:0 2px 0 0 rgb(92, 104, 26);
+    transform: translateY(-2px);
+    
+}
+
+.btn1-primary {
+    backdrop-filter: blur(8px); 
+    background-color: rgb(5, 9, 255); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(255, 255, 255, 0.5), inset -2px -2px 10px 0px rgba(0, 225, 255, 0.1), inset 0px 11px 28px 0px rgb(84, 241, 255);
+}
+
+.btn1-primary:hover {
+    box-shadow:0 2px 0 0 #005400;
+    transform: translateY(-2px);
+}
+
+
+
+.img-fluid {
+    max-width: 40%; 
+    height: auto;
+}
+
+.available {
+    color: rgb(19, 203, 19);
+}
+
+.no-available {
+    color: red;
+}
+
+.mainPageCon {
+    backdrop-filter: blur(8px);
+    background-color: rgb(255, 255, 255); 
+    border-radius: 26px; box-shadow: 35px 35px 68px 0px rgba(80, 227, 194, 0.5), inset -3px -3px 16px 0px rgba(80, 227, 194, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    padding: 10px;
+}
+
+#balance-info {
+    backdrop-filter: blur(0px); 
+    background-color: rgba(61, 55, 232, 0.934); border-radius: 26px; box-shadow: 35px 35px 68px 0px rgba(255, 255, 255, 0.5), inset -3px -3px 16px 0px rgba(12, 34, 162, 0.6), inset 0px 11px 28px 0px rgb(221, 220, 220);
+    margin: 10px;
+}
+
+#user-info {
+    backdrop-filter: blur(0px); 
+    background-color: rgba(255, 226, 3, 0.9); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(161, 161, 161, 0.5), inset -12px -12px 16px 0px rgba(255, 255, 255, 0.6), inset 0px 11px 28px 0px rgb(224, 223, 223);
+    padding: 30px;
+    margin: 10px;
+}
+
+#hamburger-info {
+    backdrop-filter: blur(5px); 
+    background-color: rgba(20, 207, 240, 0.9); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(155, 155, 155, 0.593), inset -9px -9px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(241, 241, 241);
+    margin: 10px;
+    padding: 10px;
+}
+
+#item-info {
+    backdrop-filter: blur(5px); 
+    background-color: rgba(28, 205, 43, 0.9); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -9px -9px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    padding: 40px;
+    margin: 10px;
+}
+
+.eachItemCon {
+    padding: 10px;
+    border: 0.8px solid gray;
+}
+
+.eachItemCon .purchase-btn {
+    backdrop-filter: blur(5px); 
+    background-color: rgba(0, 208, 255, 0.9); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -9px -9px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    width: 50px;
+    height: 35px;
+    border: none;
+}
+
+.eachItemCon .purchase-btn:hover {
+    transform: scale(1.2);
+}
+
+.eachItemCon .purchase-btn:active {
+    transform: scale(0.9);
+}
+
+.eachItemCon .max-btn {
+    backdrop-filter: blur(5px); 
+    background-color: rgb(0, 26, 255); 
+    border-radius: 26px; 
+    box-shadow: 35px 35px 68px 0px rgba(24, 219, 40, 0.5), inset -9px -9px 16px 0px rgba(67, 211, 74, 0.6), inset 0px 11px 28px 0px
+    rgb(99, 81, 180);
+    width: 50px;
+    height: 35px;
+    border: none;
+}
+
+.hamburger-btn:hover {
+    transform: scale(1.1);
+}
+
+.hamburger-btn:active {
+    transform: scale(0.9);
+}
+
+.save-btn {
+    backdrop-filter: blur(5px); 
+    background-color: rgba(255, 255, 255, 1); 
+    border-radius: 10px; 
+    box-shadow: 35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -8px -8px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    border: none;
+    width: 80px;
+    height: 35px;
+}
