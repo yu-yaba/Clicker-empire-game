@@ -287,10 +287,10 @@ function startInterval (userData) {
         config.userInfo.querySelectorAll("h2")[2].innerHTML = `${userData.increaseDay()} days`;
         config.balanceInfo.querySelectorAll("h2")[1].innerHTML = ` $${parseInt(userData.addSecondsProfit())}`;
 
-        if (userData.days == 365) {
-            userData.days = 1;
+        if (userData.days == 366) {
             userData.growOld();
-            config.userInfo.querySelectorAll("h2")[2].innerHTML =`${userData.age} years old`
+            userData.days = 1;
+            config.userInfo.querySelectorAll("h2")[1].innerHTML =`${userData.age} years old`
         }
     }, 1000);
 }
