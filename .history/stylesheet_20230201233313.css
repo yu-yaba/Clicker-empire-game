@@ -124,7 +124,7 @@ body {
     backdrop-filter: blur(5px); 
     background-color: rgb(26, 197, 17); 
     border-radius: 26px; 
-    box-shadow: 35px 35px 68px 0px rgba(126, 211, 33, 0.5), inset -8px -8px 16px 0px rgba(100, 218, 110, 0.9), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    box-shadow: 35px 35px 68px 0px rgba(126, 211, 33, 0.5), inset -8px -8px 16px 0px rgba(69, 208, 81, 0.9), inset 0px 11px 28px 0px rgb(255, 255, 255);
     padding: 20px;
 }
 
