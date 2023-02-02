@@ -100,18 +100,18 @@ class Item {
 };
 
 const itemList = [
-    new Item("Flip machine", 10000, 500, 0, 200, "ability", "https://cdn-icons-png.flaticon.com/512/5541/5541721.png"),
-    new Item("Auto Clicker", 30000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1481/1481125.png"),
-    new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/7401/7401287.png"),
-    new Item("ETF Bonds", 300000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/9132/9132690.png"),
-    new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/3227/3227973.png"),
-    new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3165/3165504.png"),
-    new Item("House", 20000000, 100, 0, 32000, "realEstate", "https://cdn-icons-png.flaticon.com/512/2163/2163350.png"),
-    new Item("TownHouse", 40000000, 100, 0, 64000, "realEstate", "https://cdn-icons-png.flaticon.com/512/5348/5348887.png"),
-    new Item("Mansion", 250000000, 20, 0, 500000, "realEstate", "https://cdn-icons-png.flaticon.com/512/6309/6309561.png"),
-    new Item("Industrial", 1000000000, 10, 0, 2200000, "realEstate", "https://cdn-icons-png.flaticon.com/512/8384/8384362.png"),
-    new Item("Hotel Skyscraper", 10000000000, 5, 0, 25000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/3190/3190072.png"),
-    new Item("Bullet-Speed Sky Railway", 10000000000000, 1, 0, 30000000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/4516/4516833.png")
+    new Item("Flip machine", 10000, 500, 0, 200, "ability", "https://cdn-icons-png.flaticon.com/512/9216/9216957.png"),
+    new Item("Auto Clicker", 30000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1545/1545244.png"),
+    new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/128/6059/6059893.png"),
+    new Item("ETF Bonds", 300000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
+    new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
+    new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3181/3181382.png"),
+    new Item("House", 20000000, 100, 0, 32000, "realEstate", "https://cdn-icons-png.flaticon.com/512/619/619153.png"),
+    new Item("TownHouse", 40000000, 100, 0, 64000, "realEstate", "https://cdn-icons-png.flaticon.com/512/2590/2590620.png"),
+    new Item("Mansion", 250000000, 20, 0, 500000, "realEstate", "https://cdn-icons-png.flaticon.com/512/492/492058.png"),
+    new Item("Industrial", 1000000000, 10, 0, 2200000, "realEstate", "https://cdn-icons-png.flaticon.com/512/1258/1258543.png"),
+    new Item("Hotel Skyscraper", 10000000000, 5, 0, 25000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/683/683255.png"),
+    new Item("Bullet-Speed Sky Railway", 10000000000000, 1, 0, 30000000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/3112/3112932.png")
 ]
 
 function registerAccount () {
@@ -184,7 +184,7 @@ function createHamburger (userData) {
         <p>$${userData.profitPerSeconds}/days</p>
     </div>
     <div class="container-fluid">
-        <img alt="" src='https://cdn-icons-png.flaticon.com/512/678/678966.png' class="hamburger-btn" width="65%">
+        <img alt="" src='https://icons.veryicon.com/png/o/food--drinks/flat-color-restaurant-icon/hamburger-8.png' class="hamburger-btn" width="65%">
     </div>
     `
 
