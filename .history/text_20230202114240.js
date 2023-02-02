@@ -10,10 +10,7 @@ const config = {
     particles : document.getElementById("particles-js"),
 };
 
-const clickSound = new Audio("sounds/click.mp3");
-const x1ButtonSound = new Audio("sounds/×1button.mp3");
-const maxButtonSound = new Audio("sounds/max-button.mp3");
-
+const clickSound = new Audio("sounds\click.mp3")
 
 function displayBlock (ele) {
     ele.classList.remove("d-none");
@@ -184,8 +181,6 @@ function createHamburger (userData) {
     `
 
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
-        clickSound.currentTime = 0;
-        clickSound.play();
         hamburgerCon.querySelectorAll("p")[0].innerHTML = `${userData.increaseHamburgerPerClick()} Burgers`;
         config.balanceInfo.querySelectorAll("h2")[1].innerHTML =` $${parseInt(userData.addClickProfit())}`;
     })
@@ -230,15 +225,12 @@ function createItemList (userData, itemList) {
     purchaseBtn.addEventListener("click", function () {
         if (parseInt(itemList[i].price) > parseInt(userData.money)) {
             return alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
+        } else if (itemList[i].purchaseLimit == userData["loginItems"][i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
-            x1ButtonSound.currentTime = 0;
-            x1ButtonSound.play();
             userData.reduceBalance(itemList[i].price);
             userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(1);
-            
         }
     })
 
@@ -248,11 +240,9 @@ function createItemList (userData, itemList) {
     let total = totalAmount * itemList[i].price;
         if (total > parseInt(userData.money)) {
             return alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
+        } else if (itemList[i].purchaseLimit <= userData["loginItems"][i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
-            maxButtonSound.currentTime = 0;
-            maxButtonSound.play();
             userData.reduceBalance(total);
             userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
