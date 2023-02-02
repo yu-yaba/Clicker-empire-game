@@ -100,18 +100,18 @@ class Item {
 };
 
 const itemList = [
-    new Item("Flip machine", 10000, 500, 0, 200, "ability", "https://cdn-icons-png.flaticon.com/512/5541/5541721.png"),
-    new Item("Auto Clicker", 30000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1481/1481125.png"),
-    new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/7401/7401287.png"),
-    new Item("ETF Bonds", 300000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/9132/9132690.png"),
-    new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/3227/3227973.png"),
-    new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3165/3165504.png"),
-    new Item("House", 20000000, 100, 0, 32000, "realEstate", "https://cdn-icons-png.flaticon.com/512/2163/2163350.png"),
-    new Item("TownHouse", 40000000, 100, 0, 64000, "realEstate", "https://cdn-icons-png.flaticon.com/512/5348/5348887.png"),
-    new Item("Mansion", 250000000, 20, 0, 500000, "realEstate", "https://cdn-icons-png.flaticon.com/512/6309/6309561.png"),
-    new Item("Industrial", 1000000000, 10, 0, 2200000, "realEstate", "https://cdn-icons-png.flaticon.com/512/8384/8384362.png"),
-    new Item("Hotel Skyscraper", 10000000000, 5, 0, 25000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/3190/3190072.png"),
-    new Item("Bullet-Speed Sky Railway", 10000000000000, 1, 0, 30000000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/4516/4516833.png")
+    new Item("Flip machine", 100, 500, 0, 2, "ability", "https://cdn-icons-png.flaticon.com/512/5541/5541721.png"),
+    new Item("Auto Clicker", 300, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1481/1481125.png"),
+    new Item("ETF Stock", 3000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/7401/7401287.png"),
+    new Item("ETF Bonds", 3000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/9132/9132690.png"),
+    new Item("Lemonade Stand", 300, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/3227/3227973.png"),
+    new Item("Ice Cream Truck", 1000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3165/3165504.png"),
+    new Item("House", 200000, 100, 0, 320, "realEstate", "https://cdn-icons-png.flaticon.com/512/2163/2163350.png"),
+    new Item("TownHouse", 400000, 100, 0, 640, "realEstate", "https://cdn-icons-png.flaticon.com/512/5348/5348887.png"),
+    new Item("Mansion", 2500000, 20, 0, 5000, "realEstate", "https://cdn-icons-png.flaticon.com/512/6309/6309561.png"),
+    new Item("Industrial", 10000000, 10, 0, 22000, "realEstate", "https://cdn-icons-png.flaticon.com/512/8384/8384362.png"),
+    new Item("Hotel Skyscraper", 100000000, 5, 0, 250000, "realEstate", "https://cdn-icons-png.flaticon.com/512/3190/3190072.png"),
+    new Item("Sky Railway", 100000000000, 1, 0, 300000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/4516/4516833.png")
 ]
 
 function registerAccount () {
@@ -120,7 +120,7 @@ function registerAccount () {
     else if (config.userName.value == "") {
         return alert (`名前を入力して下さい`); 
     }
-    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 100, 1, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
