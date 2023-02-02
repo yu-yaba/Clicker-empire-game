@@ -330,7 +330,7 @@ function startInterval (userData) {
 
 function createMainPage (userData) {
     let mainPageCon = document.createElement("div");
-    mainPageCon.classList.add("d-flex", "justify-content-center", "flex-wrap", "col-10", "mainPageCon")
+    mainPageCon.classList.add("d-flex", "justify-content-center", "align-items-center", "flex-wrap", "col-12", "mainPageCon")
 
     config.balanceInfo.append(createBalanceInfo(userData));
     config.userInfo.append(createUserInfo(userData));
