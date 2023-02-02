@@ -356,6 +356,7 @@ function renderNumOfPossession (item) {
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
+        ele.classList.remove("text-dark")
         ele.classList.add("available");
     } else {
         ele.classList.remove("available");
