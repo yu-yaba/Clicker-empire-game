@@ -117,7 +117,7 @@ body {
     background-color: rgba(28, 205, 43, 0.9); 
     border-radius: 26px; 
     box-shadow: 35px 35px 68px 0px rgba(145, 192, 255, 0.5), inset -9px -9px 16px 0px rgba(145, 192, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
-    padding: 20px;
+    padding: 40px;
     margin: 10px;
 }
 
@@ -126,7 +126,7 @@ body {
     background-color: rgb(26, 197, 17); 
     border-radius: 26px; 
     box-shadow: 35px 35px 68px 0px rgba(126, 211, 33, 0.5), inset -8px -8px 16px 0px rgba(100, 218, 110, 0.9), inset 0px 11px 28px 0px rgb(255, 255, 255);
-    padding: 20px;
+    padding: 0px;
 }
 
 .eachItemCon .purchase-btn {

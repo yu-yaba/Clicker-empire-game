@@ -230,7 +230,7 @@ function createItemList (userData, itemList) {
     purchaseBtn.addEventListener("click", function () {
         if (parseInt(itemList[i].price) > parseInt(userData.money)) {
             return alert("お金が足りません");
-        } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
+        } else if (itemList[i].purchaseLimit == itemList[i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
             x1ButtonSound.currentTime = 0;
@@ -251,8 +251,7 @@ function createItemList (userData, itemList) {
         } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
-            maxButtonSound.currentTime = 0;
-            maxButtonSound.play();
+            maxButtonSound.c
             userData.reduceBalance(total);
             userData.addProfit(itemList[i].increaseAssets(parseInt(totalAmount)), itemList[i].type);
             return itemList[i].increasePurchaseQuantity(totalAmount);
