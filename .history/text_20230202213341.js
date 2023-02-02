@@ -100,8 +100,8 @@ class Item {
 };
 
 const itemList = [
-    new Item("Flip machine", 10000, 500, 0, 200, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
-    new Item("Auto Clicker", 30000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1545/1545244.png"),
+    new Item("Flip machine", 3000, 500, 0, 200, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
+    new Item("Auto clicker", 30000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1545/1545244.png"),
     new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
     new Item("ETF Bonds", 300000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
     new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
@@ -120,7 +120,7 @@ function registerAccount () {
     else if (config.userName.value == "") {
         return alert (`名前を入力して下さい`); 
     }
-    else userData = new UserAccount (config.userName.value, 20, 0, 30000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 50000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -145,6 +145,7 @@ function loginAccount () {
         let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
 
     config.mainPage.innerHTML = "";
+    displayNone(config.particles);
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
     config.mainPage.append(createMainPage(userData))
@@ -218,7 +219,7 @@ function createItemList (userData, itemList) {
             <div class="col-4 col-md-3">
                 <h4 class="col-1">${itemList[i].name}</h4>
                 <p class="updatePrice">${itemList[i].price}</p>
-                <p class="updateProfit">$${renderProfit(itemList[i])}</p>
+                <p>$${renderProfit(itemList[i])}</p>
             </div>
             <div class="col-3 d-flex flex-wrap align-items-center justify-content-center">
                 <button class="purchase-btn mx-2">× 1</button>
@@ -277,12 +278,7 @@ function createItemList (userData, itemList) {
             if(parseInt(itemList[i].price) > parseInt(userData.money)) {
                 AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
             }
-        } else if (itemList[i].name == "Auto Clicker") {
-            eachItemCon.querySelectorAll(".updateProfit")[i].innerHTML = `$${userData.profitPerClick}/sec`
-            if(parseInt(itemList[i].price) > parseInt(userData.money)) {
-                AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
-            }
-        }
+        } 
         else if(parseInt(itemList[i].price) > parseInt(userData.money)) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
         }
@@ -358,7 +354,7 @@ function renderProfit (item) {
     if (item.type == "ability") return `${item.profit}/click`;
     else if (item.name == "ETF Stock") return "0.1%/sec";
     else if (item.name == "ETF Bonds") return "0.07%/sec";
-    else if (item.name == "Auto Clicker") return "100/sec";
+    else if (item.name == "Auto Clicer") return "100/sec";
     else return `${item.profit}/sec`;
 }
 
