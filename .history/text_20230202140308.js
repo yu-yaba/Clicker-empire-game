@@ -62,7 +62,7 @@ class UserAccount {
 
     addProfit (profit, type) {
         if (type == "ability") return this.profitPerClick += profit;
-        else if (type == "autoClicker") return this.profitPerSeconds += this.profitPerClick;
+        else if (type = "autoClicker") return this.profitPerSeconds += this.profitPerClick;
         else return this.profitPerSeconds += profit;
     }
 
@@ -98,8 +98,8 @@ class Item {
 const itemList = [
     new Item("Flip machine", 15000, 500, 0, 100, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
     new Item("Auto clicker", 10000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1545/1545244.png"),
-    new Item("ETF Stock", 300000, Infinity, 0, 0.01, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
-    new Item("ETF Bonds", 300000, Infinity, 0, 0.007, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
+    new Item("ETF Stock", 300000, Infinity, 0, 0.1, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
+    new Item("ETF Bonds", 300000, Infinity, 0, 0.07, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
     new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
     new Item("Ice Cream Truck", 100000, 500, 0, 120, "realEstate", "https://cdn-icons-png.flaticon.com/512/3181/3181382.png"),
     new Item("House", 20000000, 100, 0, 32000, "realEstate", "https://cdn-icons-png.flaticon.com/512/619/619153.png"),
@@ -116,7 +116,7 @@ function registerAccount () {
     else if (config.userName.value == "") {
         return alert (`名前を入力して下さい`); 
     }
-    else userData = new UserAccount (config.userName.value, 20, 0, 50000000, 100, 0, itemList, 0);
+    else userData = new UserAccount (config.userName.value, 20, 0, 500000000, 100, 0, itemList, 0);
 
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
@@ -239,16 +239,17 @@ function createItemList (userData, itemList) {
             x1ButtonSound.play();
             userData.reduceBalance(itemList[i].price);
             userData.addProfit(itemList[i].increaseAssets(1), itemList[i].type);
+            // AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], true);
             return itemList[i].increasePurchaseQuantity(1);
+            
         }
     })
 
     let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
     maxBtn.addEventListener("click", function () {
-    totalAmount = parseInt(userData.money / itemList[i].price)
-
+    let totalAmount = Math.floor(userData.money / itemList[i].price);
     let total = totalAmount * itemList[i].price;
-        if (total > userData.money) {
+        if (total > parseInt(userData.money)) {
             return alert("お金が足りません");
         } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
             return alert("これ以上購入できません");
@@ -263,17 +264,15 @@ function createItemList (userData, itemList) {
 
     setInterval (function() {
         eachItemCon.querySelectorAll(".possession")[i].innerHTML = renderNumOfPossession(itemList[i]);
-        AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], true);
         if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);           
         }
-        else if(itemList[i].name == "ETF Stock"){
-            eachItemCon.querySelectorAll(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
-        } 
+        AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], true);
+        else if(itemList[i].name == "ETF Stock") eachItemCon.querySelectorAll(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
         else if(parseInt(itemList[i].price) > parseInt(userData.money) || total > parseInt(userData.money)) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
         }
-    }, 100);
+    }, 1000);
     }
 
     itemCon.querySelector("#itemList").append(eachItemCon);
@@ -356,6 +355,7 @@ function renderNumOfPossession (item) {
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
+        ele.classList.remove("text-dark")
         ele.classList.add("available");
     } else {
         ele.classList.remove("available");

@@ -246,7 +246,8 @@ function createItemList (userData, itemList) {
     let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
     maxBtn.addEventListener("click", function () {
     totalAmount = parseInt(userData.money / itemList[i].price)
-
+ 
+    
     let total = totalAmount * itemList[i].price;
         if (total > userData.money) {
             return alert("お金が足りません");
@@ -356,6 +357,7 @@ function renderNumOfPossession (item) {
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
+        ele.classList.remove("text-dark")
         ele.classList.add("available");
     } else {
         ele.classList.remove("available");
