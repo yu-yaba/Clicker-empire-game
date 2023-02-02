@@ -268,7 +268,7 @@ function createItemList (userData, itemList) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);           
         }
         else if(itemList[i].name == "ETF Stock"){
-            eachItemCon.querySelectorAll(".updatePrice")[i].innerHTML = `$${parseInt(itemList[i].price)}`
+            eachItemCon.querySelector(".updatePrice").innerHTML = `$${parseInt(itemList[i].price)}`
         } 
         else if(parseInt(itemList[i].price) > parseInt(userData.money) || total > parseInt(userData.money)) {
             AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], false);
