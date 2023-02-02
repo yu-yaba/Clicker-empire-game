@@ -62,7 +62,6 @@ class UserAccount {
 
     addProfit (profit, type) {
         if (type == "ability") return this.profitPerClick += profit;
-        else if (type = "autoClicker") return this.profitPerSeconds += this.profitPerClick;
         else return this.profitPerSeconds += profit;
     }
 
@@ -90,14 +89,15 @@ class Item {
             this.price = this.price * 1.1;
         } else if (this.name == "ETF Bonds") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.0007;
-        } 
-        return quantity * this.profit;
+        } else if (this.name == "Auto Clicker") {
+            this.profit = 
+        }
+        return quantity * th;
     }
 };
 
 const itemList = [
     new Item("Flip machine", 15000, 500, 0, 100, "ability", "https://cdn-icons-png.flaticon.com/512/823/823215.png"),
-    new Item("Auto clicker", 10000, 100, 0, 0, "autoClicker", "https://cdn-icons-png.flaticon.com/512/1545/1545244.png"),
     new Item("ETF Stock", 300000, Infinity, 0, 0.1, "investment", "https://cdn-icons-png.flaticon.com/512/4222/4222019.png"),
     new Item("ETF Bonds", 300000, Infinity, 0, 0.07, "investment", "https://cdn-icons-png.flaticon.com/512/2601/2601439.png"),
     new Item("Lemonade Stand", 30000, 1000, 0, 30, "realEstate", "https://cdn-icons-png.flaticon.com/512/941/941769.png"),
