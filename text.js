@@ -1,3 +1,4 @@
+// 各コンテナーを定数としてまとめました
 const config = {
     initialForm : document.getElementById("initial-form"),
     mainPage : document.getElementById("main-page"),
@@ -10,21 +11,25 @@ const config = {
     particles : document.getElementById("particles-js"),
 };
 
+// 効果音です
 const clickSound = new Audio("sounds/click.mp3");
 const x1ButtonSound = new Audio("sounds/money.mp3");
 const maxButtonSound = new Audio("sounds/max-button.mp3");
 const errorSound = new Audio("sounds/error.mp3");
 
 
+// ページを表示する関数です
 function displayBlock (ele) {
     ele.classList.remove("d-none");
     ele.classList.add("d-block");
 }
 
+// ページを非表示する関数です
 function displayNone (ele) {
     ele.classList.remove("d-block");
     ele.classList.add("d-none");
 }
+
 class UserAccount {
     constructor(name, age, days, money, profitPerClick, profitPerSeconds, belongings, hamburger){
         this.name = name;
@@ -61,6 +66,7 @@ class UserAccount {
         return this.age ++;
     }
 
+    //itemのtypeによってprofitを変えるメソッドです
     addProfit (profit, type) {
         if (type == "ability") return this.profitPerClick += profit;
         else if (type == "autoClicker") {
@@ -88,6 +94,7 @@ class Item {
         this.purchaseQuantity += quantity;
     }
 
+    //Stockかbondsだった場合、所持量と購入量を足した合計からprofitを産出するメソッドです
     increaseAssets (quantity) {
         if (this.name == "ETF Stock") {
             this.profit = (this.price * (this.purchaseQuantity + quantity)) * 0.001;
@@ -114,9 +121,12 @@ const itemList = [
     new Item("Sky Railway", 100000000000, 1, 0, 300000000, "realEstate", "https://cdn-icons-png.flaticon.com/512/4516/4516833.png")
 ]
 
-function registerAccount () {
+//new gameする関数です
+function initializeAccount () {
     let userData = "";
-    if (config.userName.value === "yuya")  userData = new UserAccount("yuya", 20, 0, 10000000, 100000, 1000, itemList, 0);
+
+//userNameがmillionaireだった場合100万ドルからゲームスタートします
+    if (config.userName.value === "millionaire")  userData = new UserAccount("millionaire", 20, 0, 1000000, 100000, 1000, itemList, 0);
     else if (config.userName.value == "") {
         return alert (`名前を入力して下さい`); 
     }
@@ -129,29 +139,30 @@ function registerAccount () {
     return userData;
 }
 
+//ユーザーがログインする関数です
 function loginAccount () {
     let saveData = localStorage.getItem(config.userName.value);
     saveData = JSON.parse(saveData);
 
+//セーブデータがあった場合新しいUserAccountインスタンスに所持アイテムをプッシュします
     if (saveData == null) {alert("データが見つかりませんでした");
         return false;
     } else {
         let loginItems = [];
         for (let i = 0; i < saveData["belongings"].length; i++) {
             let eachItem = saveData["belongings"][i];
-            loginItems.push(new Item(eachItem["name"], eachItem["imgUrl"], eachItem["any"], eachItem["profit"], eachItem["purchaseQuantity"], eachItem["purchaseLimit"], eachItem["type"]))
+            loginItems.push(new Item(eachItem["name"], eachItem["price"], eachItem["purchaseLimit"], eachItem["purchaseQuantity"], eachItem["profit"], eachItem["type"], eachItem["imgUrl"]))
         }
-
-        let userData = new UserAccount(saveData["name"], saveData["age"], saveData["days"], saveData["money"], saveData["profitPerClick"], saveData["profitPerSeconds"], loginItems, saveData["hamburger"]);
 
     config.mainPage.innerHTML = "";
     displayNone(config.initialForm);
     displayBlock(config.mainPage);
-    config.mainPage.append(createMainPage(userData))
+    config.mainPage.append(createMainPage(saveData))
     return userData;
     }
 }
 
+//各コンテナーを作る関数です　
 
 function createBalanceInfo (userData) {
     let balanceInfoCon = document.createElement("div");
@@ -188,6 +199,7 @@ function createHamburger (userData) {
     </div>
     `
 
+//hamburgerの画像がクリックされた際に、ハンバーガーの数を数え、利益を残高に加算します
     hamburgerCon.querySelector(".hamburger-btn").addEventListener("click", function () {
         clickSound.currentTime = 0;
         clickSound.play();
@@ -197,7 +209,7 @@ function createHamburger (userData) {
     return hamburgerCon;
 }
 
-
+//itemListにeachItemConをプッシュします
 function createItemList (userData, itemList) {
     let itemCon = document.createElement("div");
     itemCon.classList.add("col-12");
@@ -229,14 +241,13 @@ function createItemList (userData, itemList) {
         </div>
         `
     }
+    //for文ですべてのitemにaddEventListenerを適用して購入の処理を行います
     for (let i = 0; i < itemList.length; i++) {
     let purchaseBtn = eachItemCon.querySelectorAll(".purchase-btn")[i];
     purchaseBtn.addEventListener("click", function () {
         if (parseInt(itemList[i].price) > parseInt(userData.money)) {
             errorSound.currentTime = 0;
             errorSound.play();
-            // return alert("お金が足りません");
-
         } else if (itemList[i].purchaseLimit <= itemList[i].purchaseQuantity) {
             return alert("これ以上購入できません");
         } else {
@@ -247,6 +258,8 @@ function createItemList (userData, itemList) {
             return itemList[i].increasePurchaseQuantity(1);
         }
     })
+
+//買える最大個数を購入するmaxButtonは処理が難しく断念しました
 
     // let maxBtn = eachItemCon.querySelectorAll(".max-btn")[i];
     // maxBtn.addEventListener("click", function () {
@@ -266,6 +279,7 @@ function createItemList (userData, itemList) {
     //     }
     // })
 
+//0.1秒ごとに値段の更新とAvailabilityPurchaseで購入できるかどうかボタンに色付けします。
     setInterval (function() {
         eachItemCon.querySelectorAll(".possession")[i].innerHTML = renderNumOfPossession(itemList[i]);
         AvailabilityPurchase(eachItemCon.querySelectorAll(".possession")[i], true);
@@ -311,7 +325,7 @@ function createSaveDataBtn (userData) {
     return dataCon;
 }
 
-
+//1秒ごとにuserDataの情報を更新します
 function startInterval (userData) {
     let processPerSeconds = setInterval(function () {
         config.hamburgerInfo.querySelectorAll("p").item(1).innerHTML = `[$${userData.profitPerClick}/click]`;
@@ -328,6 +342,7 @@ function startInterval (userData) {
     }, 1000);
 }
 
+//すべてのコンテナーをまとめて表示します
 function createMainPage (userData) {
     let mainPageCon = document.createElement("div");
     mainPageCon.classList.add("d-flex", "justify-content-center", "align-items-center", "flex-wrap", "col-12", "mainPageCon")
@@ -353,7 +368,7 @@ function createMainPage (userData) {
 }
 
 
-
+//itemのprofitを表示する関数です
 function renderProfit (item) {
     if (item.type == "ability") return `${item.profit}/click`;
     else if (item.name == "ETF Stock") return "0.1%/sec";
@@ -362,11 +377,13 @@ function renderProfit (item) {
     else return `${item.profit}/sec`;
 }
 
+//itemの所持数を表示する関数です
 function renderNumOfPossession (item) {
     if (item.type == "investment") return "∞";
     else return item.purchaseQuantity + "/" + item.purchaseLimit;
 }
 
+//bool値を渡して要素の色を変える関数です
 function AvailabilityPurchase(ele, bool) {
     if(bool == true) {
         ele.classList.remove("no-available");
